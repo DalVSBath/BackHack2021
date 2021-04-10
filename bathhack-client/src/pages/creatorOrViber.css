@@ -8,13 +8,13 @@
 }
 body {background-color: rgb(223, 0, 253);}
 button {
-  margin: 50px 50px 60px 60px;
-  height: 500px;
+  margin: 40px 20px 20px 40px;
+  height: 250px;
   width: 500px;
   justify-content: center;
   color: red;
-  background-color: black;
-  font-size: 25px;
+  background-color: rgb(78, 74, 74);
+  font-size: 100px;
 }
 
 .e-add-icon::before {
