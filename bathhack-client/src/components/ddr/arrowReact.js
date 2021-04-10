@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Arrow from "../../content/arrow.svg";
 import { SocketContext } from '../../App';
-import Hollow from "../../content/arrowHit.svg";
+import Hollow from "../../content/arrow.svg";
 
 class ArrowReact extends React.Component {
     constructor(props){

@@ -1,6 +1,6 @@
 import Player from '../../components/spotify/player';
 import ArrowLayout from '../../components/ddr/arrowLayout';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Countdown from "react-countdown";
 import { SocketContext } from '../../App';
 
@@ -19,6 +19,8 @@ const renderer = ({ seconds, completed }) => {
 const Viber = () => {  
     const [playing, setPlaying] = useState(false);
     const [arrows, setArrows] = useState([]);
+
+    const contextType = useContext(SocketContext);
 
     const arrowGenCallback = arrows => {
 
