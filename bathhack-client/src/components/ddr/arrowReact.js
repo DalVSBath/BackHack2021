@@ -13,6 +13,7 @@ class ArrowReact extends React.Component {
     onKeyPress(event){
       if(event.keyCode === 37) {
         this.context.send({from: this.from, type: "left", timestamp: this.props.timestamp});
+        this.props.arrowSelfGenCallback();
         console.log("clicked left")
       }
       else if(event.keyCode === 38){
