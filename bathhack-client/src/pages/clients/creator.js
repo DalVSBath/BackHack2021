@@ -1,4 +1,3 @@
-import React from 'react';
 import ArrowLayout from '../../components/ddr/arrowLayout';
 import React, {useState} from 'react';
 import Player from '../../components/spotify/player';
