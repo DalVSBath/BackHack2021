@@ -9,6 +9,7 @@ const Creator = () => {
 
     const [timestamp, setTimestamp] = useState(0);
     const [arrows, setArrows] = useState([]);
+    const [toggle, setToggle] = useState(false);
 
     const purgeArrows = (arrows) => {
         let arr = [];
@@ -24,7 +25,6 @@ const Creator = () => {
         //setTimestamp(timestamp); // todo replace with updated spotify timestamp
         
         setArrows(arrows => {
-
             let arr = purgeArrows(arrows);
             arr.push(arrow);
 
@@ -34,14 +34,14 @@ const Creator = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTimestamp(timestamp => timestamp + 1); // todo replace with updated spotify timestamp
+            setToggle(!toggle); // todo replace with updated spotify timestamp
         }, REFRESH_INTERVAL);
         return () => clearInterval(interval);
     }, []);
 
     return (
         <>
-            <Player playing={true} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} />
+            <Player playing={true} trackId="6730LysZdBvgjo5MgWo4Tm" timeStamp={toggle} ready={s => {if(s) setTimestamp(s.timestamp);}} />
             <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
