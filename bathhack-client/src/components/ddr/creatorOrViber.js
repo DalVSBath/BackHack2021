@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'creatorOrViber.css'
+//import './creatorOrViber.css'
 
 
 class creatorOrViber extends React.Component {
@@ -13,8 +13,8 @@ class creatorOrViber extends React.Component {
     }
     render() {
         return (<div>
-                <ButtonComponent cssClass='e-link' onClick={this.btnClickCreator.bind(this)}>CREATOR</ButtonComponent>
-                <ButtonComponent cssClass="e-link" onClick={this.btnClickViber.bind(this)}>VIBER</ButtonComponent>
+                <button className='e-link' onClick={this.btnClickCreator.bind(this)}>CREATOR</button>
+                <button className="e-link" onClick={this.btnClickViber.bind(this)}>VIBER</button>
             </div>);
     }
 }
