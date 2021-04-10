@@ -2,6 +2,10 @@ import React from 'react';
 import Arrow from "../../content/arrow.svg";
 import "./arrowLayout.css";
 import ArrowReact from './arrowReact';
+import BlueArrowMove from './blueArrowMove';
+import GreenArrowMove from './greenArrowMove';
+import RedArrowMove from './redArrowMove';
+import YellowArrowMove from './yellowArrowMove';
 
 const ArrowLayout = ({incomingArrows, timestamp, creator}) => {
 
@@ -33,7 +37,15 @@ const ArrowLayout = ({incomingArrows, timestamp, creator}) => {
             <img src={Arrow} className="layout-arrow red" alt="arrow" style={{WebkitTransform: "rotate(180deg)"}}/>
             <img src={Arrow} className="layout-arrow green" alt="arrow"/>
             <img src={Arrow} className="layout-arrow yellow" alt="arrow" style={{WebkitTransform: "rotate(90deg)"}}/>
+<<<<<<< HEAD
             <ArrowReact creator={creator} timestamp={timestamp} visible={arrows.visible} missed={arrows.missed}/>
+=======
+            <ArrowReact creator={creator} visible={arrows.visible} missed={arrows.missed}/>
+            <RedArrowMove />
+            <BlueArrowMove />
+            <GreenArrowMove />
+            <YellowArrowMove />
+>>>>>>> 19a0ff5c2235f2b8754944ee00c94339da723c33
         </div>
     );
 }
