@@ -5,7 +5,7 @@ import 'creatorOrViber.css'
 class App extends React.Component {
     // Click Event.
     btnClickCreator() {
-        window.open("http://localhost:3000/viber");
+        window.open("http://localhost:3000/creator");
     }
 
     btnClickViber() {
