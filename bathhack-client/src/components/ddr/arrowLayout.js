@@ -6,6 +6,7 @@ import BlueArrowMove from './blueArrowMove';
 import GreenArrowMove from './greenArrowMove';
 import RedArrowMove from './redArrowMove';
 import YellowArrowMove from './yellowArrowMove';
+import Score from './score';
 
 const ArrowLayout = ({incomingArrows, timestamp, creator}) => {
 
@@ -42,6 +43,7 @@ const ArrowLayout = ({incomingArrows, timestamp, creator}) => {
             <BlueArrowMove />
             <GreenArrowMove />
             <YellowArrowMove />
+            <Score />
         </div>
     );
 }
