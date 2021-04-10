@@ -65,3 +65,11 @@ div.card a img {
   overflow: hidden;
   object-fit: cover;
 }
+
+.Counter {
+  font-weight: 800;
+  font-size: 80px;
+  position: absolute;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+}
