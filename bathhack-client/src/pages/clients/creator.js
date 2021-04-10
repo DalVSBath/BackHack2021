@@ -9,18 +9,23 @@ const Creator = () => {
 
     const [timestamp, setTimestamp] = useState(0);
     const [arrows, setArrows] = useState([]);
+
+    const purgeArrows = (arrows) => {
+        let arr = [];
+        for (let a of arrows) {
+            if (a.timestamp - timestamp >= -LIFE_THRESHOLD) {
+                arr.push(a)
+            }
+        }
+        return arr;
+    }
     
     const arrowGenCallback = arrow => {
         //setTimestamp(timestamp); // todo replace with updated spotify timestamp
         
         setArrows(arrows => {
 
-            let arr = [];
-            for (let a of arrows) {
-                if (a.timestamp - timestamp >= -LIFE_THRESHOLD) {
-                    arr.push(a)
-                }
-            }
+            let arr = purgeArrows(arrows);
             arr.push(arrow);
 
             return arr;
@@ -30,13 +35,14 @@ const Creator = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setTimestamp(timestamp => timestamp + 1); // todo replace with updated spotify timestamp
+            setArrows(purgeArrows(arrows));
         }, REFRESH_INTERVAL);
         return () => clearInterval(interval);
     }, []);
 
     return (
         <>
-            <Player ready={() => console.log("Ready")}/>
+            {/* <Player ready={() => console.log("Ready")}/> */}
             <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
