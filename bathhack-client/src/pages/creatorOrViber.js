@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './creatorOrViber.css'
+import './creatorOrViber.css'
 
 
 class creatorOrViber extends React.Component {
