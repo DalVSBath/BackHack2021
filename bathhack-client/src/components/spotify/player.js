@@ -14,8 +14,12 @@ class Player extends React.Component {
     
 
     resume = () => {
-        this.player.togglePlay().then(() => {
+        this.player.resume().then(() => {
             console.log('Resumed!');
+            this.player.getVolume().then(volume => {
+                let volume_percentage = volume * 100;
+                console.log(`The volume of the player is ${volume_percentage}%`);
+              });
           });
     }
 
@@ -72,7 +76,7 @@ class Player extends React.Component {
                 this.play({
                 id: this.state.device_id,
                 token: "BQCm5ZCts0ZwCYRk8GStIQ_ht-AQfypaCvsgKFhZmVPkBcDuRYACU5SlqQkHCKytMAmcSya_pq28lU5PYoEZ7fG6l04mIIu94Osf_KCFAlBvVvxUNa2x7aBDAKLrUK2NGvU1u9EL6VIFIbfaxUByPfJewwaXXVwH",
-                spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+                spotify_uri: 'spotify:track:6730LysZdBvgjo5MgWo4Tm',
                 });
                 clearTimeout(time);
             }, 2500);
