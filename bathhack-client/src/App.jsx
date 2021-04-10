@@ -11,7 +11,6 @@ export const SocketContext = React.createContext(null);
 const vSocket = getViberSocket();
 const cSocket = getCreatorSocket();
 
-
 const App = () => {
   return (
       <BrowserRouter>
