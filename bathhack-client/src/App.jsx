@@ -14,8 +14,12 @@ const App = () => {
       <BrowserRouter>
         <React.Suspense fallback={"Loading..."}>
           <Switch>
-            <Route path="/creator" render={props => <SocketContext.Provider value={43}><Creator {...props} /></SocketContext.Provider>} />
-            <Route path="/viber" render={props => <SocketContext.Provider value={43}><Viber {...props} /></SocketContext.Provider>} />
+            <Route path="/creator" render={props => <SocketContext.Provider value={43}>
+                <Creator {...props} />
+              </SocketContext.Provider>} />
+            <Route path="/viber" render={props => <SocketContext.Provider value={43}>
+                <Viber {...props} />
+              </SocketContext.Provider>} />
           </Switch>
         </React.Suspense>
       </BrowserRouter>
