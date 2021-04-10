@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 const hostname = '127.0.0.1';
 const port = 4180;
 
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: port });
 
 const cRegex = new RegExp("^C/");
 const vRegex = new RegExp("^V/");
