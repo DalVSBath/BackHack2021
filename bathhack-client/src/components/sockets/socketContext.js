@@ -3,12 +3,14 @@ import { w3cwebsocket } from "websocket";
 
 class SocketContext {
     constructor(req) {
+        this.ready = false;
         this.RefreshCallBack = [];
         this.AccessCallBack = [];
         this.MessageCallBack = [];
         this.socket = new w3cwebsocket('ws://127.0.0.1:4180');
         this.socket.onopen = () => {
             console.log("socket bound");
+            this.ready = true;
             this.send(req);
         };
         this.socket.onmessage = (msg) => {
@@ -53,6 +55,10 @@ class SocketContext {
     }
 
     send = (msg) => {
+        if(!this.ready) {
+            setTimeout(() => this.send(msg), 50);
+            return;
+        }
         msg["from"] = this.req.requestCreator ? "creator" : "viber";
         this.socket.send(JSON.stringify(msg));
     }
