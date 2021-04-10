@@ -1,7 +1,37 @@
+.arrow-container {
+    --arrow-width: 150px;
+    --arrow-padding: 5px;
+}
+
 .layout-arrow {
-    height: 150px;
-    padding: 0 5px;
+    width: var(--arrow-width);
+    padding: 0 var(--arrow-padding); 
     display: inline-block;
+}
+
+.move-arrow {
+    --translation: 0vh;
+    position: absolute;
+    width: var(--arrow-width);
+}
+
+.down {
+    -webkit-transform: rotate(180deg);
+    margin-right: calc(var(--arrow-width) + 2*var(--arrow-padding));
+}
+
+.left {
+    -webkit-transform: rotate(-90deg);
+    margin-right: calc(3*var(--arrow-width) + 6*var(--arrow-padding));
+}
+
+.right {
+    -webkit-transform: rotate(90deg);
+    margin-left: calc(3*var(--arrow-width) + 6*var(--arrow-padding));
+}
+
+.up {
+    margin-left: calc(var(--arrow-width) + 2*var(--arrow-padding));
 }
 
 .blue {
