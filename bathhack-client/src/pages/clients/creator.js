@@ -35,7 +35,6 @@ const Creator = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setTimestamp(timestamp => timestamp + 1); // todo replace with updated spotify timestamp
-            setArrows(purgeArrows(arrows));
         }, REFRESH_INTERVAL);
         return () => clearInterval(interval);
     }, []);
@@ -43,7 +42,7 @@ const Creator = () => {
     return (
         <>
             {/* <Player ready={() => console.log("Ready")}/> */}
-            <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
+            <ArrowLayout incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
 }

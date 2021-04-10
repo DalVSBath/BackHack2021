@@ -6,7 +6,7 @@ import MovingArrowStaff from './movingArrowStaff';
 import Score from './score';
 
 
-const ArrowLayout = ({incomingArrows, timestamp, creator, arrowSelfGenCallback}) => {
+const ArrowLayout = ({incomingArrows, timestamp, arrowSelfGenCallback}) => {
 
     const VIEW_RANGE = 5;
     
@@ -38,7 +38,7 @@ const ArrowLayout = ({incomingArrows, timestamp, creator, arrowSelfGenCallback})
                     <img src={Arrow} className="layout-arrow red" alt="arrow" style={{WebkitTransform: "rotate(180deg)"}}/>
                     <img src={Arrow} className="layout-arrow green" alt="arrow"/>
                     <img src={Arrow} className="layout-arrow yellow" alt="arrow" style={{WebkitTransform: "rotate(90deg)"}}/>
-                    <ArrowReact creator={creator} timestamp={timestamp} visible={arrows.visible} missed={arrows.missed}
+                    <ArrowReact timestamp={timestamp} visible={arrows.visible} missed={arrows.missed}
                         arrowSelfGenCallback={arrowSelfGenCallback == null ? () => {} : arrowSelfGenCallback}/>
 
                     <Score />
