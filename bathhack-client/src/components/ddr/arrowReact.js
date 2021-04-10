@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { SocketContext } from '../../App';
 
 
-class ArrowReact extends React.Component{
+class ArrowReact extends React.Component {
     constructor(props){
       super(props);
       this.onKeyPress = this.onKeyPress.bind(this);
@@ -37,6 +37,7 @@ class ArrowReact extends React.Component{
     render(){
       return (   
         <>
+        
         </>
       )
     }

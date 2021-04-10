@@ -9,7 +9,7 @@ class Player extends React.Component {
 
         this.state = {
             device_id: null,
-            token: "BQAhwloNRiDgPnF3NE_y9W6WNuWaReoUGZUWwafb7nvUlpa6-kq2-Lfqaoyf4mc1GMV-8DgjZYJgO8PWmPl-V4RvrILjAQv-3ZP4QFBAStDhEybgly4zhTTg61dB6Q2IcL2SDmYf2ZKRw0Pd3aQB-NDyU4z9cMqP",
+            token: "BQDzuPYCvuExURWgrvFe7xY-D_r_M_G12Sn35td28s8T-hG2Oy4jky2gNEpQ9UP_eksHE_t9eJng7lII5mxgqTxHyPBD2wUVu7DVq6J1iBJdAFXwKbn3yI2smQK9brYv9mzT6U9qfZk3xkFpccYarfD5X7vC0u-o",
         }
     }
     static contextType = SocketContext;
@@ -23,6 +23,21 @@ class Player extends React.Component {
     componentDidUpdate(prevProps) {
         if(this.props.playing !== prevProps.playing) {
             this.togglePlayback();
+        }
+
+        if(this.props.trackId !== prevProps.trackId) {
+            this.play({
+                id: this.state.device_id,
+                spotify_uri: 'spotify:track:' + this.props.trackId,
+                });
+        }
+
+        if(this.props.timeStamp !== prevProps.timeStamp) {
+            this.player.getCurrentState().then(s => {
+                if(!s)
+                    console.error("user not musicing");
+                this.props.ready(s)
+            });
         }
     }
 
@@ -68,6 +83,7 @@ class Player extends React.Component {
               this.props.ready();
           });
       };
+
     handleScriptLoad = () => {
         return new Promise(resolve => {
           if (window.Spotify) {

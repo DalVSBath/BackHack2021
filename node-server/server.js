@@ -9,8 +9,6 @@ const wss = new WebSocket.Server({ port: port });
 const cRegex = new RegExp("^C/");
 const vRegex = new RegExp("^V/");
 
-const timeStampCommandRegex = new RegExp("^setTimestamp:")
-
 let processCommand = (msg) => {
   if (cRegex.test(msg)) {
     cmd = msg.slice(2);
