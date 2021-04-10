@@ -8,7 +8,7 @@ const SongSelector  = React.lazy(() => import('./components/spotify/songSelector
 
 const Creator = React.lazy(() => import("./pages/clients/creator"));
 const Viber = React.lazy(() => import("./pages/clients/viber"));
-const Log = React.lazy(() => import("./components/ddr/creatorOrViber"));
+const Log = React.lazy(() => import("./pages/creatorOrViber"));
 
 export const SocketContext = React.createContext(null);
 const vSocket = getViberSocket({requestViber: true});
