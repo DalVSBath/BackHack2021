@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { getCreatorSocket, getViberSocket } from './components/sockets/getSockets';
 import './App.css';
+import video1 from './content/vd1.mp4'
 
 
 const SongSelector  = React.lazy(() => import('./components/spotify/songSelector'));
@@ -19,6 +20,9 @@ const cSocket = getCreatorSocket({requestCreator: true});
 
 const App = () => {
   return (
+    <><div>
+        <video src={video1} playsinline autoPlay muted loop id="myVideo"/>
+      </div>
       <BrowserRouter>
         <React.Suspense fallback={"Loading..."}>
           <Switch>
@@ -45,6 +49,7 @@ const App = () => {
           </Switch>
         </React.Suspense>
       </BrowserRouter>
+      </>
   );
 }
 
