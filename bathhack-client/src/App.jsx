@@ -8,7 +8,7 @@ const SongSelector  = React.lazy(() => import('./components/spotify/songSelector
 
 const Creator = React.lazy(() => import("./pages/clients/creator"));
 const Viber = React.lazy(() => import("./pages/clients/viber"));
-
+const Log = React.lazy(() => import("./components/ddr/creatorOrViber"));
 
 export const SocketContext = React.createContext(null);
 const vSocket = getViberSocket();
@@ -28,6 +28,11 @@ const App = () => {
             <Route path="/selector" render={props => <SocketContext.Provider value={cSocket}>
                 <SongSelector {...props} />
               </SocketContext.Provider>} />
+
+              <Route path="/Log" render={props => <SocketContext.Provider value={cSocket}>
+                <Log {...props} />
+              </SocketContext.Provider>} />
+              
           </Switch>
         </React.Suspense>
       </BrowserRouter>
