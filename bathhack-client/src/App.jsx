@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import { getCreatorSocket, getViberSocket } from './components/sockets/getSockets';
 import './App.css';
 import video1 from './content/vd1.mp4'
@@ -26,6 +26,9 @@ const App = () => {
       <BrowserRouter>
         <React.Suspense fallback={"Loading..."}>
           <Switch>
+            <Route path="/" render={props => 
+              <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw"}}><div><h1 style={{fontSize: "90px"}}>Welcome to ...</h1></div><br /><div><Link style={{fontSize: "70px"}} to={"/Log"}>Click to Start</Link></div></div>
+            } />
             <Route path="/creator" render={props => <SocketContext.Provider value={cSocket}>
                 <Creator {...props} />
               </SocketContext.Provider>} />

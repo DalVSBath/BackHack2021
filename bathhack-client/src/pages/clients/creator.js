@@ -36,8 +36,7 @@ const Creator = () => {
 
     return (
         <>
-            {console.log(arrows)};
-            <Player />
+            <Player ready={() => console.log("Ready")}/>
             <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
