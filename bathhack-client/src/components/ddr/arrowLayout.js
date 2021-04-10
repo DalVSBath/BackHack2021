@@ -38,11 +38,12 @@ const ArrowLayout = ({incomingArrows, timestamp, creator}) => {
             <img src={Arrow} className="layout-arrow red" alt="arrow" style={{WebkitTransform: "rotate(180deg)"}}/>
             <img src={Arrow} className="layout-arrow green" alt="arrow"/>
             <img src={Arrow} className="layout-arrow yellow" alt="arrow" style={{WebkitTransform: "rotate(90deg)"}}/>
-            <ArrowReact creator={creator} visible={arrows.visible} missed={arrows.missed}/>
+            <ArrowReact creator={creator} timestamp={timestamp} visible={arrows.visible} missed={arrows.missed}/>
             <RedArrowMove />
             <BlueArrowMove />
             <GreenArrowMove />
             <YellowArrowMove />
+
             <Score />
         </div>
     );
