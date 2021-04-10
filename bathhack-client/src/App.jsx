@@ -11,8 +11,8 @@ const Viber = React.lazy(() => import("./pages/clients/viber"));
 
 
 export const SocketContext = React.createContext(null);
-const vSocket = getViberSocket();
-const cSocket = getCreatorSocket();
+const vSocket = getViberSocket({requestViber: true});
+const cSocket = getCreatorSocket({requestCreator: true});
 
 const App = () => {
   return (

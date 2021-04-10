@@ -6,22 +6,26 @@ class ArrowReact extends React.Component {
     constructor(props){
       super(props);
       this.onKeyPress = this.onKeyPress.bind(this);
+      this.from = this.props.creator ? "creator" : "viber";
     }
     static contextType = SocketContext;
 
     onKeyPress(event){
       if(event.keyCode === 37) {
-        this.context.send({type: "viber"});
+        this.context.send({from: this.from, type: "left", timestamp: this.props.timestamp});
         console.log("clicked left")
       }
       else if(event.keyCode === 38){
-          console.log("clicked up")
+        this.context.send({from: this.from, type: "up", timestamp: this.props.timestamp});
+        console.log("clicked up")
       }
       else if(event.keyCode === 39){
-          console.log("clicked right")
+        this.context.send({from: this.from, type: "right", timestamp: this.props.timestamp});
+        console.log("clicked right")
       }
       else if(event.keyCode === 40){
-          console.log("clicked down")
+        this.context.send({from: this.from, type: "down", timestamp: this.props.timestamp});
+        console.log("clicked down")
       }
     }  
     
@@ -37,7 +41,7 @@ class ArrowReact extends React.Component {
     render(){
       return (   
         <>
-        
+
         </>
       )
     }

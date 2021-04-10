@@ -4,6 +4,9 @@ const WebSocket = require('ws');
 const hostname = '127.0.0.1';
 const port = 4180;
 
+const connections = {};
+const clients = {creator: null, viber: null};
+
 const wss = new WebSocket.Server({ port: port });
 
 const cRegex = new RegExp("^C/");
@@ -23,34 +26,59 @@ let processCommand = (msg) => {
 }
 
 const processMessage = m => {
-  if (m.type == "viber") {
+  if (m.from == "viber") {
 
   }
-  else if (m.type == "creator") {
-
+  else if (m.from == "creator") {
+    connections[clients.viber].send({type: m.type, timestamp: m.timestamp})
   }
 }
 
-wss.on('connection', ws => {  
+const getId = () => {
+  const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  return s4() + s4() + '-' + s4();
+};
+
+wss.on('connection', ws => {
+
+  var id = getId();
+
+  connections[id] = ws;
 
   ws.on('message', message => {
-    console.log(message);
-    processMessage(message);
+    message = JSON.parse(message);
+    if (message.requestCreator === true) {
+      if (clients.creator == null) {
+        console.log("set creator to " + id)
+        clients.creator = id;
+      }
+      else {
+        ws.send("false")
+      }
+    }
+    else if (message.requestViber === true) {
+      if (clients.viber == null) {
+        console.log("set viber to " + id)
+        clients.viber = id;
+      }
+      else {
+        ws.send("false")
+      }
+    } else {
+      if (clients.creator != null && clients.viber != null) {
+        console.log(message);
+        processMessage(message);
+      }
+    }
   })
 
+  ws.on('close', connection => {
+    if (clients.creator === id) {
+      clients.creator = null;
+    } else if (clients.viber === id) {
+      clients.viber = null;
+    }
+    console.log("closed connection " + id)
+    delete connections[id];
+  })
 })
-
-// wss.on('connection', function connection(ws) {
-
-//   const connection = 
-
-//   ws.on('message', function incoming(message) {
-
-//     processCommand(message);
-    
-
-//     console.log('received: %s', message);
-//   });
-
-//   ws.send('something');
-// });
