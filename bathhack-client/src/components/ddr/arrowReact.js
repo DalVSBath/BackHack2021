@@ -6,7 +6,6 @@ class ArrowReact extends React.Component {
     constructor(props){
       super(props);
       this.onKeyPress = this.onKeyPress.bind(this);
-      this.from = this.props.creator ? "creator" : "viber";
     }
     static contextType = SocketContext;
 

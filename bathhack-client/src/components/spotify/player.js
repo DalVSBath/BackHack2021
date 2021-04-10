@@ -94,7 +94,12 @@ class Player extends React.Component {
           if (window.Spotify) {
             resolve();
           } else {
-            window.onSpotifyWebPlaybackSDKReady = resolve;
+              try {
+                window.onSpotifyWebPlaybackSDKReady = resolve;
+
+              } catch (e) {
+                  setTimeout(resolve, 500);
+              }
           }
         }).then(() => {
             const token = this._spotifyService.GetAccessToken();

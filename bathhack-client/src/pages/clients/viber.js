@@ -28,6 +28,8 @@ const Viber = () => {
                 renderer={renderer}
                 onComplete={() => console.log("done")}
             />
+            {/* <Player playing={playing} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} /> */}
+            <ArrowLayout />        
             <Player playing={playing} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} />
         </>
     )
