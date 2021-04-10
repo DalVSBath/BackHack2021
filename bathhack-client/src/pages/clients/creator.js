@@ -4,7 +4,7 @@ import Player from '../../components/spotify/player';
 
 const Creator = () => {
 
-    const REFRESH_INTERVAL = 100;
+    const REFRESH_INTERVAL = 16;
 
     const [timestamp, setTimestamp] = useState(0);
     const [arrows, setArrows] = useState([]);
@@ -23,7 +23,7 @@ const Creator = () => {
 
     return (
         <>
-            <Player />
+            <Player ready={() => console.log("Ready")}/>
             <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
