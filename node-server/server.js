@@ -1,8 +1,12 @@
 const http = require('http');
 const WebSocket = require('ws');
+const fetch = require("node-fetch");
 
 const hostname = '127.0.0.1';
 const port = 4180;
+
+const SpotifySecret = "e3b2bc257c9f443bb1c0a6a527c612ab";
+const SpotifyId = "50f563707d1041d5bc9237357be49ee6";
 
 const connections = {};
 const clients = {creator: null, viber: null};
@@ -25,8 +29,74 @@ const wss = new WebSocket.Server({ port: port });
 //   }
 // }
 
-const processCode = code => {
-  
+const processRefresh = (token, from) => {
+    var formBody = [];
+    details = {
+        "grant_type": "refresh_token",
+        "refresh_token": token,
+    };
+
+    for (var property in details) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
+    fetch(`https://accounts.spotify.com/api/token`,
+    {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': "Basic NTBmNTYzNzA3ZDEwNDFkNWJjOTIzNzM1N2JlNDllZTY6ZTNiMmJjMjU3YzlmNDQzYmIxYzBhNmE1MjdjNjEyYWI="
+        },
+        body: formBody
+    })
+        .then(dta => { return dta.json(); })
+        .then(data => {
+            if (from == "viber") {
+                connections[clients.viber].send(data)
+            }
+            else if (from == "creator") {
+              connections[clients.creator].send(data)
+            }
+        });
+}
+
+const processCode = (code, from) => {
+    //console.log(code);
+    var formBody = [];
+    details = {
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": "http://localhost:3000/spotify/callback/"
+    };
+
+    for (var property in details) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
+    fetch(`https://accounts.spotify.com/api/token`,
+    {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': "Basic NTBmNTYzNzA3ZDEwNDFkNWJjOTIzNzM1N2JlNDllZTY6ZTNiMmJjMjU3YzlmNDQzYmIxYzBhNmE1MjdjNjEyYWI="
+        },
+        body: formBody
+    })
+        .then(dta => { return dta.json(); })
+        .then(data => {
+            if (from == "viber") {
+                connections[clients.viber].send(JSON.stringify(data))
+            }
+            else if (from == "creator") {
+              connections[clients.creator].send(JSON.stringify(data))
+            }
+        });
   
 }
 
@@ -53,8 +123,11 @@ wss.on('connection', ws => {
   ws.on('message', message => {
     message = JSON.parse(message);
     if (message.isCode === true) {
-      processCode(message.code);
+      processCode(message.code, message.from);
     } 
+    else if (message.isRefresh === true) {
+        processRefresh(message.token, message.from);
+    }
     else if (message.requestCreator === true) {
       if (clients.creator == null) {
         console.log("set creator to " + id)

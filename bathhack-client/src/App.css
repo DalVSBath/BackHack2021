@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+
+div.card {
+  padding: 10px;
+  margin: 10px;
+  background-color: #DDD;
+  border: #AAA;
+  border-radius: 9px;
+}
+
+div.card a img {
+  border-radius: 7px;
+}
+
+.card-image-link {
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  background-color: transparent;
+}
+
+#myVideo{
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  position:absolute ;
+  overflow: hidden;
+  object-fit: cover;
+}
