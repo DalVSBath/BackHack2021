@@ -1,21 +1,39 @@
 import Player from '../../components/spotify/player';
 import ArrowLayout from '../../components/ddr/arrowLayout';
 import React, { useState } from 'react';
+import Countdown from "react-countdown";
+import { SocketContext } from '../../App';
 
+
+const renderer = ({ seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      //return <Completionist />;
+      return ""
+    } else {
+      // Render a countdown
+      return <span className="Counter" style={{fontWeight: "800", fontSize:"80px",position:"absolute"}}>{seconds}</span>;
+    }
+  };
 
 const Viber = () => {  
     const [playing, setPlaying] = useState(false);
+    const [arrows, setArrows] = useState([]);
 
     const arrowGenCallback = arrows => {
 
-    }
+    };
 
     return (
         <>
+            <ArrowLayout incomingArrows={arrows}/>        
+            <Countdown
+                date={Date.now() + 10000}
+                renderer={renderer}
+                onComplete={() => console.log("done")}
+            />
+            {/* <Player playing={playing} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} /> */}
             <Player playing={playing} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} />
-            <ArrowLayout />
-            <p>this is the viber screen (Thanks for the amazing name Dan)</p>
-            <button onClick={() => setPlaying(!playing)}>This Is Button</button>           
         </>
     )
 }

@@ -3,27 +3,23 @@ import { DownMoveArrow, LeftMoveArrow, RightMoveArrow, UpMoveArrow } from './mov
 
 const arrowTypeToComponent = (viewRange, arrow, timestamp) => {
 
-    const style = `translate(0, ${-(viewRange * (1-(arrow.timestamp - timestamp)))}vh)`;
+    const style = `translate(0, clamp(${-(viewRange * (1-(arrow.timestamp - timestamp)))}vh, -200vh, 200vh))`;
 
     const dict = {  
-        "left" : <LeftMoveArrow style={{transform: "rotate(-90deg) " + style}}/>,
-        "right": <RightMoveArrow style={{transform: "rotate(90deg) " + style}} />,
+        "left" : <LeftMoveArrow style={{transform: style + " rotate(-90deg)"}}/>,
+        "right": <RightMoveArrow style={{transform: style + " rotate(90deg)"}} />,
         "up": <UpMoveArrow style={{transform: style}}/>,
-        "down": <DownMoveArrow style={{transform: "rotate(180deg) " + style}}/>
+        "down": <DownMoveArrow style={{transform: style + " rotate(180deg)"}}/>
     }
-
-    console.log(dict[arrow.type].style);
 
     return dict[arrow.type];
 
 }
 
-
 const MovingArrowStaff = ({viewRange, arrows, timestamp}) => {
 
-    {console.log(arrows)}
     return (
-        <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw"}}>
+        <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw", overflow: "hidden"}}>
             {arrows.map(arrow => {
                 return arrowTypeToComponent(viewRange, arrow, timestamp);
             })}
