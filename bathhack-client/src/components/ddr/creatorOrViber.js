@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'creatorOrViber.css'
 
 
-class App extends React.Component {
+class creatorOrViber extends React.Component {
     // Click Event.
     btnClickCreator() {
         window.open("http://localhost:3000/creator");
@@ -18,3 +18,4 @@ class App extends React.Component {
             </div>);
     }
 }
+    export default creatorOrViber
