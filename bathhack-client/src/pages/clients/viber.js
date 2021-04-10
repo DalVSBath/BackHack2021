@@ -2,6 +2,8 @@ import Player from '../../components/spotify/player';
 import ArrowLayout from '../../components/ddr/arrowLayout';
 import React, { useState } from 'react';
 import Countdown from "react-countdown";
+import { SocketContext } from '../../App';
+
 
 const renderer = ({ seconds, completed }) => {
     if (completed) {

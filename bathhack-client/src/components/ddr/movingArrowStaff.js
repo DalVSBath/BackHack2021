@@ -3,7 +3,7 @@ import { DownMoveArrow, LeftMoveArrow, RightMoveArrow, UpMoveArrow } from './mov
 
 const arrowTypeToComponent = (viewRange, arrow, timestamp) => {
 
-    const style = `translate(0, ${-(viewRange * (1-(arrow.timestamp - timestamp)))}vh)`;
+    const style = `translate(0, clamp(${-(viewRange * (1-(arrow.timestamp - timestamp)))}vh, -200vh, 200vh))`;
 
     const dict = {  
         "left" : <LeftMoveArrow style={{transform: style + " rotate(-90deg)"}}/>,
@@ -15,7 +15,6 @@ const arrowTypeToComponent = (viewRange, arrow, timestamp) => {
     return dict[arrow.type];
 
 }
-
 
 const MovingArrowStaff = ({viewRange, arrows, timestamp}) => {
 
