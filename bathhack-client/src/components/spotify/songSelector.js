@@ -1,16 +1,18 @@
 import React from "react";
 import { Card } from 'react-bootstrap';
 import Player from "./player";
+import SpotifyService from "./spotifyService";
 
 class SongSelector extends React.Component {
     constructor(props) {
         super(props);
 
+        this._spotifyService = new SpotifyService();
+
         this.state = {
             items: [],
             trackId: null,
             playing: false,
-            token: "BQDagIJRxbhBi6Bc1iiKVCWAaJe-TX62yfj1ZzbEuLGdWTvsB2x0JQRxqsM6jJh5EV-BgHseSI94LR2an_TLU4JbxS-XAjx17G_nSPNGpozfB_bcp_bOBK39JKME4112Mc35Lbf2iNKMt-QPAjlj_Z2bmLcpfjMn",
             search: "",
             loading: false,
         };
@@ -21,11 +23,11 @@ class SongSelector extends React.Component {
     }
 
     _fetch = search => {
-        fetch(`https://api.spotify.com/v1/search?type=track&market=from_token&offset=0&q=${encodeURIComponent(search)}`, {
+        fetch(`https://api.spotify.com/v1/search?type=track&market=from_token&limit=50&offset=0&q=${encodeURIComponent(search)}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.state.token}`
+                'Authorization': `Bearer ${this._spotifyService.GetAccessToken()}`
             }
         }).then(res => {return res.json();}).then(dta => {
             this.setState({items: dta.tracks.items})

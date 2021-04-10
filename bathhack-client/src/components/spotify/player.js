@@ -1,15 +1,16 @@
 import React from "react";
 import Script from 'react-load-script'
 import { SocketContext } from "../../App";
+import SpotifyService from "./spotifyService";
 class Player extends React.Component {
     constructor(props) {
         super(props);
 
         this.player = null;
+        this._spotifyService = new SpotifyService();
 
         this.state = {
             device_id: null,
-            token: "BQDagIJRxbhBi6Bc1iiKVCWAaJe-TX62yfj1ZzbEuLGdWTvsB2x0JQRxqsM6jJh5EV-BgHseSI94LR2an_TLU4JbxS-XAjx17G_nSPNGpozfB_bcp_bOBK39JKME4112Mc35Lbf2iNKMt-QPAjlj_Z2bmLcpfjMn",
         }
     }
     static contextType = SocketContext;
@@ -74,7 +75,7 @@ class Player extends React.Component {
             body: JSON.stringify({ uris: [spotify_uri] }),
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${this.state.token}`
+              'Authorization': `Bearer ${this._spotifyService.GetAccessToken()}`
             },
           }).then(() => {
               if(this.props.playing) {
@@ -94,7 +95,7 @@ class Player extends React.Component {
             window.onSpotifyWebPlaybackSDKReady = resolve;
           }
         }).then(() => {
-            const token = this.state.token;
+            const token = this._spotifyService.GetAccessToken();
             this.player = new window.Spotify.Player({
                 name: 'Beat Breaker',
                 getOAuthToken: cb => { cb(token); }
