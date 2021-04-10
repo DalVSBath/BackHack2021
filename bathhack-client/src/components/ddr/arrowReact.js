@@ -12,22 +12,22 @@ class ArrowReact extends React.Component {
 
     onKeyPress(event){
       if(event.keyCode === 37) {
-        this.context.send({from: this.from, type: "left", timestamp: this.props.timestamp});
+        this.context.send({type: "left", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "left", timestamp: this.props.timestamp});
         console.log("clicked left")
       }
       else if(event.keyCode === 38){
-        this.context.send({from: this.from, type: "up", timestamp: this.props.timestamp});
+        this.context.send({type: "up", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "up", timestamp: this.props.timestamp});
         console.log("clicked up")
       }
       else if(event.keyCode === 39){
-        this.context.send({from: this.from, type: "right", timestamp: this.props.timestamp});
+        this.context.send({type: "right", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "right", timestamp: this.props.timestamp});
         console.log("clicked right")
       }
       else if(event.keyCode === 40){
-        this.context.send({from: this.from, type: "down", timestamp: this.props.timestamp});
+        this.context.send({type: "down", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "down", timestamp: this.props.timestamp});
         console.log("clicked down")
       }
