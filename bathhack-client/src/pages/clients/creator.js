@@ -1,9 +1,17 @@
 import React from 'react';
 import ArrowLayout from '../../components/ddr/arrowLayout';
+import React, {useState} from 'react';
+import Player from '../../components/spotify/player';
 
 const Creator = () => {
+
+    const [timestamp, setTimestamp] = useState(0);
+
     return (
-        <ArrowLayout />
+        <>
+            <Player />
+            <ArrowLayout creator timestamp={5}/>
+        </>
     )
 }
 

@@ -68,6 +68,7 @@ class Player extends React.Component {
               this.props.ready();
           });
       };
+
     handleScriptLoad = () => {
         return new Promise(resolve => {
           if (window.Spotify) {
