@@ -2,7 +2,7 @@ import React from 'react';
 import Player from '../../components/spotify/player'
 
 
-const Viber = () => {
+const Viber = () => {  
     return (
         <>
         <Player />

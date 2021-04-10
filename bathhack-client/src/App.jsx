@@ -6,16 +6,19 @@ import './App.css';
 const Creator = React.lazy(() => import("./pages/clients/creator"));
 const Viber = React.lazy(() => import("./pages/clients/viber"));
 
+
+export const SocketContext = React.createContext(null);
+
 const App = () => {
   return (
-    <BrowserRouter>
-      <React.Suspense fallback={"Loading..."}>
-        <Switch>
-          <Route path="/creator" render={props => <Creator {...props} />} />
-          <Route path="/viber" render={props => <Viber {...props} />} />
-        </Switch>
-      </React.Suspense>
-    </BrowserRouter>
+      <BrowserRouter>
+        <React.Suspense fallback={"Loading..."}>
+          <Switch>
+            <Route path="/creator" render={props => <SocketContext.Provider value={43}><Creator {...props} /></SocketContext.Provider>} />
+            <Route path="/viber" render={props => <SocketContext.Provider value={43}><Viber {...props} /></SocketContext.Provider>} />
+          </Switch>
+        </React.Suspense>
+      </BrowserRouter>
 
 
     // <div className="App">

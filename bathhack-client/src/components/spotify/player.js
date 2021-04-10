@@ -1,5 +1,6 @@
 import React from "react";
 import Script from 'react-load-script'
+import { SocketContext } from "../../App";
 class Player extends React.Component {
     constructor(props) {
         super(props);
@@ -12,10 +13,11 @@ class Player extends React.Component {
         }
     }
     
+    static contextType = SocketContext;
 
     resume = () => {
         this.player.resume().then(() => {
-            console.log('Resumed!');
+            console.log('Resumed! + ' + this.context);
             this.player.getVolume().then(volume => {
                 let volume_percentage = volume * 100;
                 console.log(`The volume of the player is ${volume_percentage}%`);
@@ -26,14 +28,13 @@ class Player extends React.Component {
     play = ({
         spotify_uri,
         id,
-        token
       }) => {
           fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
             method: 'PUT',
             body: JSON.stringify({ uris: [spotify_uri] }),
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer BQCm5ZCts0ZwCYRk8GStIQ_ht-AQfypaCvsgKFhZmVPkBcDuRYACU5SlqQkHCKytMAmcSya_pq28lU5PYoEZ7fG6l04mIIu94Osf_KCFAlBvVvxUNa2x7aBDAKLrUK2NGvU1u9EL6VIFIbfaxUByPfJewwaXXVwH`
+              'Authorization': `Bearer ${this.state.token}`
             },
           });
       };
@@ -45,7 +46,7 @@ class Player extends React.Component {
             window.onSpotifyWebPlaybackSDKReady = resolve;
           }
         }).then(() => {
-            const token = 'BQCm5ZCts0ZwCYRk8GStIQ_ht-AQfypaCvsgKFhZmVPkBcDuRYACU5SlqQkHCKytMAmcSya_pq28lU5PYoEZ7fG6l04mIIu94Osf_KCFAlBvVvxUNa2x7aBDAKLrUK2NGvU1u9EL6VIFIbfaxUByPfJewwaXXVwH';
+            const token = this.state.token;
             this.player = new window.Spotify.Player({
                 name: 'Web Playback SDK Quick Start Player',
                 getOAuthToken: cb => { cb(token); }
@@ -58,37 +59,36 @@ class Player extends React.Component {
         this.player.addListener('playback_error', ({ message }) => { console.error(message); });
 
             // Playback status updates
-            this.player.addListener('player_state_changed', state => { console.log(state); });
+        this.player.addListener('player_state_changed', state => { console.log(state); });
 
-            // Ready
-            this.player.addListener('ready', ({ device_id }) => {
-                console.log('Ready with Device ID', device_id);
+        // Ready
+        this.player.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
 
-                this.setState({device_id: device_id});
+            this.setState({device_id: device_id});
+        });
+
+        // Not Ready
+        this.player.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id);
+        });
+
+        var time = setTimeout(() => {
+            this.play({
+            id: this.state.device_id,
+            spotify_uri: 'spotify:track:6730LysZdBvgjo5MgWo4Tm',
             });
+            clearTimeout(time);
+        }, 2500);
 
-            // Not Ready
-            this.player.addListener('not_ready', ({ device_id }) => {
-                console.log('Device ID has gone offline', device_id);
-            });
+        var time2 = setTimeout(() => {
+            this.resume();
+            clearTimeout(time2);
+        }, 5000)
 
-            var time = setTimeout(() => {
-                this.play({
-                id: this.state.device_id,
-                token: "BQCm5ZCts0ZwCYRk8GStIQ_ht-AQfypaCvsgKFhZmVPkBcDuRYACU5SlqQkHCKytMAmcSya_pq28lU5PYoEZ7fG6l04mIIu94Osf_KCFAlBvVvxUNa2x7aBDAKLrUK2NGvU1u9EL6VIFIbfaxUByPfJewwaXXVwH",
-                spotify_uri: 'spotify:track:6730LysZdBvgjo5MgWo4Tm',
-                });
-                clearTimeout(time);
-            }, 2500);
-
-            var time2 = setTimeout(() => {
-                this.resume();
-                clearTimeout(time2);
-            }, 5000)
-
-            // Connect to the player!
-            this.player.connect();
-            });
+        // Connect to the player!
+        this.player.connect();
+        });
       }
 
     handleScriptError = e => {
