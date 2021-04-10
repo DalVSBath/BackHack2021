@@ -3,7 +3,6 @@ import "./arrowLayout.css";
 import ArrowReact from './arrowReact';
 import MovingArrowStaff from './movingArrowStaff';
 import Score from './score';
-import Hollow from '../../content/arrowHit.svg'
 
 
 const ArrowLayout = ({incomingArrows, timestamp, arrowSelfGenCallback}) => {

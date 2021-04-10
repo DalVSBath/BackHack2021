@@ -26,15 +26,8 @@ const App = () => {
       <BrowserRouter>
         <React.Suspense fallback={"Loading..."}>
           <Switch>
-<<<<<<< HEAD
-            <Route path="/" exact = {true} render={props => 
-              
-              <div><h1> We're using react... <Link  to={"/Log"}>Go to Log</Link> </h1></div>
-      
-=======
             <Route path="/" exact={true} render={props => 
               <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw"}}><div style={{ width:"100vw", textAlign:"center", display:"block" }}><h1 style={{fontSize: "90px", width:"100%"}}>Welcome to ...</h1></div><br /><div><Link style={{fontSize: "70px"}} to={"/Log"}>Click to Start</Link></div></div>
->>>>>>> e26961e9f93b4876f37d514be15a4a1985fc2336
             } />
             <Route path="/creator" render={props => <SocketContext.Provider value={cSocket}>
                 <Creator {...props} />
