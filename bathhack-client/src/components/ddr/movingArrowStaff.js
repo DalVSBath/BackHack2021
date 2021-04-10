@@ -19,7 +19,6 @@ const arrowTypeToComponent = (viewRange, arrow, timestamp) => {
 
 const MovingArrowStaff = ({viewRange, arrows, timestamp}) => {
 
-    {console.log(arrows)}
     return (
         <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw", overflow: "hidden"}}>
             {arrows.map(arrow => {
