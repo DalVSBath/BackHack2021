@@ -105,7 +105,7 @@ const processMessage = m => {
 
   }
   else if (m.from == "creator") {
-    connections[clients.viber].send({type: m.type, timestamp: m.timestamp})
+    connections[clients.viber].send(JSON.stringify({type: m.type, timestamp: m.timestamp}));
   }
 }
 

@@ -16,20 +16,21 @@ const renderer = ({ seconds, completed }) => {
 
 const Viber = () => {  
     const [playing, setPlaying] = useState(false);
+    const [arrows, setArrows] = useState([]);
 
     const arrowGenCallback = arrows => {
 
-    }
+    };
 
     return (
         <>
+            <ArrowLayout incomingArrows={arrows}/>        
             <Countdown
                 date={Date.now() + 10000}
                 renderer={renderer}
                 onComplete={() => console.log("done")}
             />
             {/* <Player playing={playing} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} /> */}
-            <ArrowLayout />        
             <Player playing={playing} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} />
         </>
     )

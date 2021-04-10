@@ -26,12 +26,12 @@ class SocketContext {
                 for (let index = 0; index < this.RefreshCallBack.length; index++) {
                     this.RefreshCallBack[index](dataFromServer);
                 }
-                // this.RefreshCallBack = [];
+                this.RefreshCallBack = [];
             }else if(dataFromServer.access_token) {
                 for (let index = 0; index < this.AccessCallBack.length; index++) {
                     this.AccessCallBack[index](dataFromServer);
                 }
-                // this.AccessCallBack = [];
+                this.AccessCallBack = [];
             }else{
                 for (let index = 0; index < this.MessageCallBack.length; index++) {
                     this.MessageCallBack[index](dataFromServer);
