@@ -62,4 +62,6 @@ div.card a img {
   height: 100%;
   z-index: -1;
   position:absolute ;
+  overflow: hidden;
+  object-fit: cover;
 }

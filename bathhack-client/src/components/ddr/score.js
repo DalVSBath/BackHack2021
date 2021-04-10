@@ -22,7 +22,7 @@ class Score extends Component {
   render() {
     return (
       <div className style={{"position":"absolute","right":"30px","top":"2vh"}}> 
-            <h2 style={{"color":"green"}}>{this.state.count}</h2>
+            <h2 style={{"color":"white"}}>Score:{this.state.count}</h2>
      </div>
     );
   }
