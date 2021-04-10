@@ -9,22 +9,22 @@ const Creator = () => {
     const [timestamp, setTimestamp] = useState(0);
     const [arrows, setArrows] = useState([]);
     
-    const arrowGenCallback = arrows => {
-
+    const arrowGenCallback = arrow => {
+        //setTimestamp(timestamp); // todo replace with updated spotify timestamp
+        setArrows(arrows => [...arrows, arrow])
     }
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTimestamp(timestamp => timestamp + 1);
+            setTimestamp(timestamp => timestamp + 1); // todo replace with updated spotify timestamp
         }, REFRESH_INTERVAL);
         return () => clearInterval(interval);
     }, []);
 
     return (
         <>
-            {/* {console.log("the time is: " + timestamp)} */}
             <Player />
-            <ArrowLayout creator timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
+            <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
 }

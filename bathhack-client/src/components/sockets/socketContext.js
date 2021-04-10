@@ -60,10 +60,13 @@ class SocketContext {
     sendCode = (code) => {
         this.send({isCode: true, code: code});
     }
+<<<<<<< HEAD
+=======
 
     sendRefresh = refresh => {
         this.send({isRefresh: true, token: refresh});
     }
+>>>>>>> e902b35bc347cd80d0716958ced8b16ae2db0268
 }
 
 export default SocketContext;
