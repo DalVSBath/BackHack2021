@@ -11,7 +11,7 @@ class GreenArrowMove extends React.Component{
     render() {
         return(
         <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100vh"}}>
-        <img src={Arrow} className="layout-arrow green" alt="arrow" style={{"left":"55vw","top": this.x+"vh","position": 'absolute'}}/>
+        <img src={Arrow} className="layout-arrow green" alt="arrow" style={{"left":"50vw","top": this.x+"vh","position": 'absolute'}}/>
     </div>
     )
     }

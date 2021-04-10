@@ -11,7 +11,7 @@ class RedArrowMove extends React.Component{
     render() {
         return(
         <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100vh"}}>
-       <img src={Arrow} className="layout-arrow red" alt="arrow" style={{"WebkitTransform": "rotate(180deg)","left":"35vw","top": this.x+"vh","position": 'absolute'}}/>
+       <img src={Arrow} className="layout-arrow red" alt="arrow" style={{"WebkitTransform": "rotate(180deg)","left":"40vw","top": this.x+"vh","position": 'absolute'}}/>
     </div>
     )
     }

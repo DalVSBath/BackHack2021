@@ -11,7 +11,7 @@ class BlueArrowMove extends React.Component{
     render() {
         return(
         <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100vh"}}>
-        <img src={Arrow} className="layout-arrow blue" alt="arrow" style={{"-webkit-transform": "rotate(-90deg)" ,"left":"25vw","top": this.x+"vh","position": 'absolute'}}/>
+        <img src={Arrow} className="layout-arrow blue" alt="arrow" style={{"-webkit-transform": "rotate(-90deg)" ,"left":"30vw","top": this.x+"vh","position": 'absolute'}}/>
     </div>
     )
     }
