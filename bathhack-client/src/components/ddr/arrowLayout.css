@@ -3,3 +3,19 @@
     padding: 0 5px;
     display: inline-block;
 }
+
+.blue {
+    filter: invert(1) sepia(1) saturate(100) hue-rotate(105deg);
+}
+
+.red {
+    filter: invert(1) sepia(1) saturate(100) hue-rotate(290deg);
+}
+
+.green {
+    filter: invert(1) sepia(1) saturate(100) hue-rotate(70deg);
+}
+
+.yellow {
+    filter: invert(1) sepia(1) saturate(100);
+}
