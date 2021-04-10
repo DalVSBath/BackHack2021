@@ -9,7 +9,7 @@ class Player extends React.Component {
 
         this.state = {
             device_id: null,
-            token: "BQDzuPYCvuExURWgrvFe7xY-D_r_M_G12Sn35td28s8T-hG2Oy4jky2gNEpQ9UP_eksHE_t9eJng7lII5mxgqTxHyPBD2wUVu7DVq6J1iBJdAFXwKbn3yI2smQK9brYv9mzT6U9qfZk3xkFpccYarfD5X7vC0u-o",
+            token: "BQDagIJRxbhBi6Bc1iiKVCWAaJe-TX62yfj1ZzbEuLGdWTvsB2x0JQRxqsM6jJh5EV-BgHseSI94LR2an_TLU4JbxS-XAjx17G_nSPNGpozfB_bcp_bOBK39JKME4112Mc35Lbf2iNKMt-QPAjlj_Z2bmLcpfjMn",
         }
     }
     static contextType = SocketContext;
@@ -21,8 +21,10 @@ class Player extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.playing !== prevProps.playing) {
-            this.togglePlayback();
+        if(this.props.playing) {
+            this.resume();
+        }else {
+            this.pause();
         }
 
         if(this.props.trackId !== prevProps.trackId) {
