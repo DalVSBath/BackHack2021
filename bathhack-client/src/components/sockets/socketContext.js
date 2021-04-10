@@ -56,7 +56,7 @@ class SocketContext {
 
     send = (msg) => {
         if(!this.ready) {
-            setTimeout(() => this.send(msg), 50);//wait 50 millisecnds then recheck
+            setTimeout(() => this.send(msg), 50);
             return;
         }
         msg["from"] = this.req.requestCreator ? "creator" : "viber";
