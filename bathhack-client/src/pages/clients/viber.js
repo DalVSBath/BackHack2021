@@ -7,9 +7,10 @@ const renderer = ({ seconds, completed }) => {
     if (completed) {
       // Render a completed state
       //return <Completionist />;
+      return ""
     } else {
       // Render a countdown
-      return <span>{seconds}</span>;
+      return <span className="Counter" style={{fontWeight: "800", fontSize:"80px",position:"absolute"}}>{seconds}</span>;
     }
   };
 
@@ -23,12 +24,11 @@ const Viber = () => {
     return (
         <>
             <Countdown
-                date={Date.now() + 5000}
+                date={Date.now() + 10000}
                 renderer={renderer}
                 onComplete={() => console.log("done")}
             />
             <Player playing={playing} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} />
-            <ArrowLayout />        
         </>
     )
 }
