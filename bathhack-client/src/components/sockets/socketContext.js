@@ -1,12 +1,13 @@
 import React from 'react';
 import { w3cwebsocket } from "websocket";
 
-class socketContext {
+class SocketContext {
 
-    constructor() {
-        this.socket = new w3cwebsocket('ws://127.0.0.1:8080');
+    constructor(req) {
+        this.socket = new w3cwebsocket('ws://127.0.0.1:4180');
         this.socket.onopen = () => {
             console.log("socket bound");
+            this.send(req);
         };
         this.socket.onmessage = () => {
             console.log("sent message");
@@ -19,4 +20,4 @@ class socketContext {
 
 }
 
-export default socketContext;
+export default SocketContext;

@@ -1,13 +1,13 @@
 import socketContext from "./socketContext";
 
-const getCreatorSocket = () => {
-    const client = new socketContext();
+const getCreatorSocket = (req) => {
+    const client = new socketContext(req);
 
     return client;
 }
 
-const getViberSocket = () => {      
-    const client = new socketContext();
+const getViberSocket = (req) => {      
+    const client = new socketContext(req);
     return client;
 }
 

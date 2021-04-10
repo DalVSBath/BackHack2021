@@ -11,10 +11,11 @@ const Viber = React.lazy(() => import("./pages/clients/viber"));
 const SpotifyCallback = React.lazy(() => import("./pages/spotify/callback"));
 const SpotifyLogin = React.lazy(() => import("./pages/spotify/login"));
 
+const Log = React.lazy(() => import("./pages/creatorOrViber"));
 
 export const SocketContext = React.createContext(null);
-const vSocket = getViberSocket();
-const cSocket = getCreatorSocket();
+const vSocket = getViberSocket({requestViber: true});
+const cSocket = getCreatorSocket({requestCreator: true});
 
 const App = () => {
   return (
@@ -36,6 +37,11 @@ const App = () => {
             <Route path="/spotify/login" render={props => <SocketContext.Provider value={cSocket}>
                 <SpotifyLogin {...props} />
               </SocketContext.Provider>} />
+
+              <Route path="/Log" render={props => <SocketContext.Provider value={cSocket}>
+                <Log {...props} />
+              </SocketContext.Provider>} />
+              
           </Switch>
         </React.Suspense>
       </BrowserRouter>

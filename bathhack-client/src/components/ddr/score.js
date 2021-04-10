@@ -15,8 +15,7 @@ class Score extends Component {
 
   render() {
     return (
-      <div className="App"> 
-            <button onClick = {this.increment} className = "counter">add</button>
+      <div className style={{"position":"absolute","right":"30px","top":"2vh"}}> 
             <h2>{this.state.count}</h2>
      </div>
     );
