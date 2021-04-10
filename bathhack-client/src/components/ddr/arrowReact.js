@@ -28,7 +28,8 @@ class ArrowReact extends React.Component{
       }  
       render(){
         return (   
-          <input />
+          <div>
+          </div>
         )
       }
 }
