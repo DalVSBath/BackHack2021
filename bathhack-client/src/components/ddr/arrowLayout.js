@@ -6,7 +6,7 @@ import Score from './score';
 import Hollow from '../../content/arrowHit.svg'
 
 
-const ArrowLayout = ({incomingArrows, timestamp, creator, arrowSelfGenCallback}) => {
+const ArrowLayout = ({incomingArrows, timestamp, arrowSelfGenCallback}) => {
 
     const VIEW_RANGE = 5;
     

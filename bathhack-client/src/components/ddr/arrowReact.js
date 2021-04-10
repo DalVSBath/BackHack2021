@@ -19,27 +19,27 @@ class ArrowReact extends React.Component {
     }
     onKeyDown(event){
       if(event.keyCode === 37) {
-        this.context.send({from: this.from, type: "left", timestamp: this.props.timestamp});
         document.getElementById("blue").src={Hollow};
+        this.context.send({type: "left", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "left", timestamp: this.props.timestamp});
         console.log("clicked left")
       }
       else if(event.keyCode === 38){
-        this.context.send({from: this.from, type: "up", timestamp: this.props.timestamp});
+        this.context.send({type: "up", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "up", timestamp: this.props.timestamp});
         document.getElementById("green").src={Hollow};
         document.getElementById("green").className="layout-arrow"
         console.log("clicked up")
       }
       else if(event.keyCode === 39){
-        this.context.send({from: this.from, type: "right", timestamp: this.props.timestamp});
+        this.context.send({type: "right", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "right", timestamp: this.props.timestamp});
         document.getElementById("yellow").src={Hollow};
         document.getElementById("yellow").className="layout-arrow";
         console.log("clicked right")
       }
       else if(event.keyCode === 40){
-        this.context.send({from: this.from, type: "down", timestamp: this.props.timestamp});
+        this.context.send({type: "down", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "down", timestamp: this.props.timestamp});
         document.getElementById("red").src={Hollow};
         console.log("clicked down")
