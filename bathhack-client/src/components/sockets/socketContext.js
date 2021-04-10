@@ -18,6 +18,10 @@ class SocketContext {
         this.socket.send(JSON.stringify(msg));
     }
 
+    sendCode = (code) => {
+        this.socket.send({isCode: true, code: code});
+    }
+
 }
 
 export default SocketContext;

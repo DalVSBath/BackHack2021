@@ -7,6 +7,11 @@ const Creator = () => {
     const REFRESH_INTERVAL = 500;
 
     const [timestamp, setTimestamp] = useState(0);
+    const [arrows, setArrows] = useState([]);
+    
+    const arrowGenCallback = arrows => {
+
+    }
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -19,7 +24,7 @@ const Creator = () => {
         <>
             {/* {console.log("the time is: " + timestamp)} */}
             <Player />
-            <ArrowLayout creator timestamp={timestamp}/>
+            <ArrowLayout creator timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
 }

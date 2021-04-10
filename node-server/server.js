@@ -9,20 +9,25 @@ const clients = {creator: null, viber: null};
 
 const wss = new WebSocket.Server({ port: port });
 
-const cRegex = new RegExp("^C/");
-const vRegex = new RegExp("^V/");
+// const cRegex = new RegExp("^C/");
+// const vRegex = new RegExp("^V/");
 
-let processCommand = (msg) => {
-  if (cRegex.test(msg)) {
-    cmd = msg.slice(2);
+// let processCommand = (msg) => {
+//   if (cRegex.test(msg)) {
+//     cmd = msg.slice(2);
 
-  }
-  else if (vRegex.test(msg)) {
-    cmd = msg.slice(2);
-  }
-  else {
-    console.log("recieved invalid cmd: " + msg)
-  }
+//   }
+//   else if (vRegex.test(msg)) {
+//     cmd = msg.slice(2);
+//   }
+//   else {
+//     console.log("recieved invalid cmd: " + msg)
+//   }
+// }
+
+const processCode = code => {
+  
+  
 }
 
 const processMessage = m => {
@@ -47,7 +52,10 @@ wss.on('connection', ws => {
 
   ws.on('message', message => {
     message = JSON.parse(message);
-    if (message.requestCreator === true) {
+    if (message.isCode === true) {
+      processCode(message.code);
+    } 
+    else if (message.requestCreator === true) {
       if (clients.creator == null) {
         console.log("set creator to " + id)
         clients.creator = id;
