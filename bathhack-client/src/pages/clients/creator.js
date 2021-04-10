@@ -17,7 +17,7 @@ const Creator = () => {
 
     return (
         <>
-            {console.log("the time is: " + timestamp)}
+            {/* {console.log("the time is: " + timestamp)} */}
             <Player />
             <ArrowLayout creator timestamp={timestamp}/>
         </>
