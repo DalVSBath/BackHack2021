@@ -11,7 +11,7 @@ class ArrowReact extends React.Component{
 
     onKeyPress(event){
       if(event.keyCode === 37) {
-        this.context.send(JSON.stringify({type: "viber"}));
+        this.context.send({type: "viber"});
         console.log("clicked left")
       }
       else if(event.keyCode === 38){
@@ -36,8 +36,8 @@ class ArrowReact extends React.Component{
 
     render(){
       return (   
-        <div>
-        </div>
+        <>
+        </>
       )
     }
 }

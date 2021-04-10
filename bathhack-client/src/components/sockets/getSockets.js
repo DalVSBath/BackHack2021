@@ -1,21 +1,14 @@
-import { w3cwebsocket } from "websocket";
+import socketContext from "./socketContext";
 
 const getCreatorSocket = () => {
-    const client = new w3cwebsocket('ws://127.0.0.1:4180');
-    client.onopen = () => {
-        console.log("Creator socket bound");
-    }
+    const client = new socketContext();
+
     return client;
 }
 
-const getViberSocket = () => {
-    const client = new w3cwebsocket('ws://127.0.0.1:4180');
-    client.onopen = () => {
-        console.log("Viber socket bound");
-    };
-    client.onmessage = () => {
-        console.log("viber sent message");
-    };
+const getViberSocket = () => {      
+    const client = new socketContext();
     return client;
 }
+
 export { getCreatorSocket, getViberSocket };

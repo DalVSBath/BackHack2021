@@ -6,11 +6,6 @@ const port = 4180;
 
 const wss = new WebSocket.Server({ port: port });
 
-const clients = {creator: null, viber: null};
-
-let creatorTimestamp = null;
-let viberTimestamp = null;
-
 const cRegex = new RegExp("^C/");
 const vRegex = new RegExp("^V/");
 
@@ -29,21 +24,35 @@ let processCommand = (msg) => {
   }
 }
 
-wss.on('request', request => {
-  const connection = request.accept(null, request.origin);
+const processMessage = m => {
+  if (m.type == "viber") {
+
+  }
+  else if (m.type == "creator") {
+
+  }
+}
+
+wss.on('connection', ws => {  
+
+  ws.on('message', message => {
+    console.log(message);
+    processMessage(message);
+  })
+
 })
 
-wss.on('connection', function connection(ws) {
+// wss.on('connection', function connection(ws) {
 
-  const connection = 
+//   const connection = 
 
-  ws.on('message', function incoming(message) {
+//   ws.on('message', function incoming(message) {
 
-    processCommand(message);
+//     processCommand(message);
     
 
-    console.log('received: %s', message);
-  });
+//     console.log('received: %s', message);
+//   });
 
-  ws.send('something');
-});
+//   ws.send('something');
+// });
