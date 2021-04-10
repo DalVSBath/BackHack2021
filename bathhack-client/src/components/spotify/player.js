@@ -22,10 +22,12 @@ class Player extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.playing) {
-            this.resume();
-        }else {
-            this.pause();
+        if(prevProps.playing !== this.props.playing){
+            if(this.props.playing) {
+                this.resume();
+            }else {
+                this.pause();
+            }
         }
 
         if(this.props.trackId !== prevProps.trackId) {
@@ -102,10 +104,10 @@ class Player extends React.Component {
             });
 
         // Error handling
-        this.player.addListener('initialization_error', ({ message }) => { console.error(message); });
-        this.player.addListener('authentication_error', ({ message }) => { console.error(message); });
-        this.player.addListener('account_error', ({ message }) => { console.error(message); });
-        this.player.addListener('playback_error', ({ message }) => { console.error(message); });
+        //this.player.addListener('initialization_error', ({ message }) => { console.error(message); });
+        //this.player.addListener('authentication_error', ({ message }) => { console.error(message); });
+        //this.player.addListener('account_error', ({ message }) => { console.error(message); });
+        //this.player.addListener('playback_error', ({ message }) => { console.error(message); });
 
             // Playback status updates
         //this.player.addListener('player_state_changed', state => { console.log(state); });

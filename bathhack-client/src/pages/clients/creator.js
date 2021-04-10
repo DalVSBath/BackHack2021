@@ -36,7 +36,7 @@ const Creator = () => {
 
     return (
         <>
-            <Player playing={false} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} />
+            <Player playing={true} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} />
             <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
