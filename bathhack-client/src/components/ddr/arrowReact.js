@@ -7,19 +7,21 @@ class ArrowReact extends React.Component {
     constructor(props){
       super(props);
       this.onKeyDown = this.onKeyDown.bind(this);
+      this.onKeyUp = this.onKeyUp.bind(this);
       this.from = this.props.creator ? "creator" : "viber";
     }
     static contextType = SocketContext;
     onKeyUp(event){
         console.log("released");
-        document.getElementById("blue").src={Arrow};
-        document.getElementById("red").src={Arrow};
-        document.getElementById("green").src={Arrow};
-        document.getElementById("yellow").src={Arrow};
+        document.getElementById("blue").src=Arrow;
+        document.getElementById("red").src=Arrow;
+        document.getElementById("green").src=Arrow;
+        document.getElementById("green").className="layout-arrow green"
+        document.getElementById("yellow").src=Arrow;
     }
     onKeyDown(event){
       if(event.keyCode === 37) {
-        document.getElementById("blue").src={Hollow};
+        document.getElementById("blue").src=Hollow;
         this.context.send({type: "left", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "left", timestamp: this.props.timestamp});
         console.log("clicked left")
@@ -27,21 +29,21 @@ class ArrowReact extends React.Component {
       else if(event.keyCode === 38){
         this.context.send({type: "up", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "up", timestamp: this.props.timestamp});
-        document.getElementById("green").src={Hollow};
-        document.getElementById("green").className="layout-arrow"
+        document.getElementById("green").src=Hollow;
+        //document.getElementById("green").className="layout-arrow"
         console.log("clicked up")
       }
       else if(event.keyCode === 39){
         this.context.send({type: "right", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "right", timestamp: this.props.timestamp});
-        document.getElementById("yellow").src={Hollow};
-        document.getElementById("yellow").className="layout-arrow";
+        document.getElementById("yellow").src=Hollow;
+        //document.getElementById("yellow").className="layout-arrow";
         console.log("clicked right")
       }
       else if(event.keyCode === 40){
         this.context.send({type: "down", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "down", timestamp: this.props.timestamp});
-        document.getElementById("red").src={Hollow};
+        document.getElementById("red").src=Hollow;
         console.log("clicked down")
       }
     }  
@@ -49,10 +51,12 @@ class ArrowReact extends React.Component {
     componentDidMount(){
 
       document.addEventListener("keydown", this.onKeyDown, false);
+      document.addEventListener("keyup",this.onKeyUp, false);
     }  
 
     componentWillUnmount(){
       document.removeEventListener("keydown", this.onKeyDown, false);
+      document.removeEventListener("keyup", this.onKeyUp, false);
     }  
 
     render(){
