@@ -20,7 +20,7 @@ const cSocket = getCreatorSocket({requestCreator: true});
 
 const App = () => {
   return (
-    <><div>
+    <><div sytle={{alignItems: "center"}}>
         <video src={video1} playsinline autoPlay muted loop id="myVideo"/>
       </div>
       <BrowserRouter>
@@ -29,7 +29,7 @@ const App = () => {
             <Route path="/" exact = {true} render={props => 
               
               <div><h1> We're using react... <Link  to={"/spotify/login"}>Go to Log</Link> </h1></div>
-      
+  
             } />
             <Route path="/creator" render={props => <SocketContext.Provider value={cSocket}>
                 <Creator {...props} />

@@ -44,6 +44,7 @@ class Player extends React.Component {
                 this.props.ready(s);
             });
         }
+
     }
 
     togglePlayback = () => {
