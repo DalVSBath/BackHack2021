@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import { getCreatorSocket, getViberSocket } from './components/sockets/getSockets';
 import './App.css';
 import video1 from './content/vd1.mp4'
+import logo from "./content/logo3.png"
 
 
 const SongSelector  = React.lazy(() => import('./components/spotify/songSelector'));
@@ -27,10 +28,12 @@ const App = () => {
       <BrowserRouter>
         <React.Suspense fallback={"Loading..."}>
           <Switch>
-            <Route path="/" exact = {true} render={props => 
-              
-              <div><h1> We're using react... <Link  to={"/spotify/login"}>Go to Log</Link> </h1></div>
-  
+            <Route path="/" exact={true} render={props => 
+              <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"130vh", width: "100vw"}}>
+                <div style={{height:"90vh"}}> <h1 style={{fontSize: "70px",top:"10vh", width:"100%"}}>Welcome to </h1></div>
+                <div style={{position: "absolute",top:"35vh",height:"35vh", alignItems:"center",justifyItems:"center"}}><img src={logo}/></div>
+                <div style={{position: "absolute",height:"30vh",top:"60vh",}}><Link style={{fontSize: "35px"}} to={"/Log"}>Click to Start</Link></div>
+                </div>
             } />
             <Route path="/creator" render={props => <SocketContext.Provider value={cSocket}>
                 <Creator {...props} />
