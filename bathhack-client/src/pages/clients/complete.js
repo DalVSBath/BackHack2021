@@ -28,8 +28,8 @@ class creatorOrViber extends React.Component {
         return (<div style={{display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width:"100wh"}}>
                 <title><header>something</header></title>
                 <Score count={this.score} />
-                <button style={{fontSize:"70px",alignItems: "center"}} className='e-link' onClick={this.btnClickCreator.bind(this)}>Go Again</button>
-                <button style={{fontSize:"70px",alignItems: "center"}} className="e-link" onClick={this.btnClickViber.bind(this)}>Exit</button>
+                <button style={{fontSize:"70px",alignItems: "center"}} className='e-link' onClick={this.btnClickCreator.bind(this)}>𝔾𝕠 𝔸𝕘𝕒𝕚𝕟</button>
+                <button style={{fontSize:"70px",alignItems: "center"}} className="e-link" onClick={this.btnClickViber.bind(this)}>𝔼𝕩𝕚𝕥</button>
             </div>);
     }
 }

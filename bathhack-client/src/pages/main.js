@@ -13,12 +13,12 @@ const Main = () => {
             playStatus={ReactSound.status.PLAYING}
             />
         <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw"}}>
-            <div style={{height:"90vh"}}> <h1 style={{fontSize: "70px",top:"10vh", width:"100%"}}>Welcome to </h1></div>
+            <div style={{height:"90vh"}}> <h1 style={{fontSize: "70px",top:"10vh", width:"100%", font:"Agency FB"}}>Welcome to  </h1></div>
             <div style={{position: "absolute",top:"35vh",height:"35vh", alignItems:"center",justifyItems:"center"}}><img src={logo}/></div>
             <div style={{position: "absolute",height:"30vh",top:"60vh",}}>
                 <Link to={"/Spotify/Login"}>
                     <button style={{ whiteSpace: 'nowrap', fontSize: "40px", backgroundColor: "Transparent", backgroundRepeat: "no-repeat", border: "none", cursor: "pointer", overflow: "hidden", outline: "none"}}>
-                        {"> CLICK TO START <"}
+                        {"【ＣＬＩＣＫ　ＴＯ　ＳＴＡＲＴ】"}
                     </button>
                 </Link>
             </div>

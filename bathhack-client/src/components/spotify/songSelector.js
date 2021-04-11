@@ -56,8 +56,8 @@ class SongSelector extends React.Component {
         return (
             <>
                 <div>
-                    <input type="text" value={this.state.search} onChange={e => this.setState({search: e.target.value})} />
-                    <button onClick={() => this._fetch(this.state.search)}>Search</button>
+                    <input type="text" style={{alignContent:"center"}} value={this.state.search} onChange={e => this.setState({search: e.target.value})} />
+                    <button style={{height:"30px",alignContent:"center"}} onClick={() => this._fetch(this.state.search)}>Search</button>
                 </div>
                 <Player playing={this.state.playing} trackId={this.state.trackId} ready={() => {if(this.state.trackId != null && this.state.loading) this.setState({playing: true});}} />
                 <div>
