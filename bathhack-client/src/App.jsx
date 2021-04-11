@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import { getCreatorSocket, getViberSocket } from './components/sockets/getSockets';
 import './App.css';
 import video1 from './content/vd1.mp4'
+import logo from "./content/logo3.png"
 
 
 const SongSelector  = React.lazy(() => import('./components/spotify/songSelector'));
@@ -26,15 +27,12 @@ const App = () => {
       <BrowserRouter>
         <React.Suspense fallback={"Loading..."}>
           <Switch>
-<<<<<<< Updated upstream
-            <Route path="/" exact = {true} render={props => 
-              
-              <div><h1> We're using react... <Link  to={"/spotify/login"}>Go to Log</Link> </h1></div>
-  
-=======
             <Route path="/" exact={true} render={props => 
-              <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw"}}><h1 style={{fontSize: "70px", width:"100%"}}>Welcome to 𝒟𝒾𝓈𝐻𝒶𝓇𝓂𝑜𝓃𝓎</h1><br></br><Link style={{fontSize: "35px", textAlign: "center"}} to={"/Log"}>Click to Start</Link></div>
->>>>>>> Stashed changes
+              <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"130vh", width: "100vw"}}>
+                <div style={{height:"20vh"}}> <h1 style={{fontSize: "70px",top:"10vh", width:"100%"}}>Welcome to </h1></div>
+                <div style={{position: "absolute",top:"30vh",height:"60vh", alignItems:"center",justifyItems:"center"}}><img src={logo}/></div>
+                <div style={{height:"20vh",top:"90vh",justifyItems:"center"}}><Link style={{fontSize: "35px", textAlign: "center"}} to={"/Log"}>{"\n"}Click to Start</Link></div>
+                </div>
             } />
             <Route path="/creator" render={props => <SocketContext.Provider value={cSocket}>
                 <Creator {...props} />
