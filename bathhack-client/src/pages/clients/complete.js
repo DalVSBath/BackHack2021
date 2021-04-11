@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Player from '../../components/spotify/player';
-import './creatorOrViber.css'
+import Score from "../../components/ddr/score";
+import '../creatorOrViber.css'
 import qs from "qs";
+import { Redirect } from 'react-router';
 
 class creatorOrViber extends React.Component {
     constructor(props) {
@@ -19,9 +20,11 @@ class creatorOrViber extends React.Component {
     }
 
     btnClickViber() {
-        self.close()
+        this.setState({redirect: ""});
     }
     render() {
+        if(this.state.redirect)
+            return <Redirect to={"/"} />
         return (<div style={{display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width:"100wh"}}>
                 <title><header>something</header></title>
                 <Score count={this.score} />
