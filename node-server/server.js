@@ -96,7 +96,7 @@ const processReady = (track) => {
 
 const processMessage = m => {
   if (m.from == "viber") {
-
+    connections[clients.creator].send(JSON.stringify({type: m.type, timestamp: m.timestamp}));
   }
   else if (m.from == "creator") {
     connections[clients.viber].send(JSON.stringify({type: m.type, timestamp: m.timestamp}));
