@@ -14,6 +14,7 @@ const SpotifyCallback = React.lazy(() => import("./pages/spotify/callback"));
 const SpotifyLogin = React.lazy(() => import("./pages/spotify/login"));
 const Waiting = React.lazy(() => import("./pages/clients/waiting"));
 const Main = React.lazy(() => import("./pages/main"));
+const Complete = React.lazy(() => import("./pages/clients/complete"))
 
 const Log = React.lazy(() => import("./pages/creatorOrViber"));
 
@@ -47,15 +48,15 @@ const App = () => {
             <Route path="/spotify/login" render={props => <SocketContext.Provider value={cSocket}>
                 <SpotifyLogin {...props} />
               </SocketContext.Provider>} />
-
               <Route path="/Log" render={props => <SocketContext.Provider value={cSocket}>
                 <Log {...props} />
               </SocketContext.Provider>} />
-
               <Route path="/waiting" render={props => <SocketContext.Provider value={vSocket}>
                 <Waiting {...props} />
               </SocketContext.Provider>} />
-              
+              <Route path="/complete" render={props => <SocketContext.Provider value={vSocket}>
+                <Complete {...props} />
+              </SocketContext.Provider>} />
           </Switch>
         </React.Suspense>
       </BrowserRouter>
