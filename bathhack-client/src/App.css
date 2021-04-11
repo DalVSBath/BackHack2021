@@ -84,6 +84,7 @@ h1{
 .Counter {
   font-weight: 800;
   font-size: 80px;
+  color: white;
   position: absolute;
   top: calc(50% - 40px);
   left: calc(50% - 40px);
