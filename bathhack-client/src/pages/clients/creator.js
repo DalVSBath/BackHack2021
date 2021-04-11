@@ -37,11 +37,11 @@ const Creator = () => {
             setToggle(!toggle); // todo replace with updated spotify timestamp
         }, REFRESH_INTERVAL);
         return () => clearInterval(interval);
-    }, []);
+    }, [toggle]);
 
     return (
         <>
-            <Player playing={true} trackId="6730LysZdBvgjo5MgWo4Tm" timeStamp={toggle} ready={s => {if(s) setTimestamp(s.timestamp);}} />
+                <Player playing={true} trackId="6730LysZdBvgjo5MgWo4Tm" timeStamp={toggle} ready={s => {if(s) {setTimestamp(s.timestamp);}}} />
             <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
         </>
     )
