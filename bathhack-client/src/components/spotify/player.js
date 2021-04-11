@@ -116,6 +116,15 @@ class Player extends React.Component {
 
             // Playback status updates
         this.player.addListener('player_state_changed', state => { 
+            if (
+                this.state && state
+                && state.track_window.previous_tracks.find(x => x.id === state.track_window.current_track.id)
+                && state.paused
+                ) {
+                    this.pause();
+                    console.log('Track ended');
+                    this.props.TrackEnd(true);
+              }
             if(this.props.playing) {
                 this.resume();
             }else{
