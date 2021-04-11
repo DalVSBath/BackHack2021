@@ -11,6 +11,7 @@ const Creator = React.lazy(() => import("./pages/clients/creator"));
 const Viber = React.lazy(() => import("./pages/clients/viber"));
 const SpotifyCallback = React.lazy(() => import("./pages/spotify/callback"));
 const SpotifyLogin = React.lazy(() => import("./pages/spotify/login"));
+const Waiting = React.lazy(() => import("./pages/clients/waiting"));
 
 const Log = React.lazy(() => import("./pages/creatorOrViber"));
 
@@ -49,6 +50,10 @@ const App = () => {
 
               <Route path="/Log" render={props => <SocketContext.Provider value={cSocket}>
                 <Log {...props} />
+              </SocketContext.Provider>} />
+
+              <Route path="/waiting" render={props => <SocketContext.Provider value={vSocket}>
+                <Waiting {...props} />
               </SocketContext.Provider>} />
               
           </Switch>

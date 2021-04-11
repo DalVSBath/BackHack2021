@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 
 class Score extends Component {
 
-    constructor(props){
-        super (props);
-        this.state = {
-            count: 0
-        }
-    }
-
     smallIncrement = () =>{
         this.setState( {count: this.state.count + 1 });
     }
@@ -22,7 +15,7 @@ class Score extends Component {
   render() {
     return (
       <div className style={{"position":"absolute","right":"30px","top":"2vh"}}> 
-            <h2 style={{"color":"white"}}>Score:{this.state.count}</h2>
+            <h2 style={{"color":"white"}}>Score:{this.props.count}</h2>
      </div>
     );
   }

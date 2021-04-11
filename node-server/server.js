@@ -29,7 +29,7 @@ const wss = new WebSocket.Server({ port: port });
 //   }
 // }
 
-const processRefresh = (token, from) => {
+const processRefresh = (token, id) => {
     var formBody = [];
     details = {
         "grant_type": "refresh_token",
@@ -54,16 +54,11 @@ const processRefresh = (token, from) => {
     })
         .then(dta => { return dta.json(); })
         .then(data => {
-            if (from == "viber") {
-                connections[clients.viber].send(data)
-            }
-            else if (from == "creator") {
-              connections[clients.creator].send(data)
-            }
+          connections[id].send(JSON.stringify(data));
         });
 }
 
-const processCode = (code, from) => {
+const processCode = (code, id) => {
     //console.log(code);
     var formBody = [];
     details = {
@@ -90,14 +85,13 @@ const processCode = (code, from) => {
     })
         .then(dta => { return dta.json(); })
         .then(data => {
-            if (from == "viber") {
-                connections[clients.viber].send(JSON.stringify(data))
-            }
-            else if (from == "creator") {
-              connections[clients.creator].send(JSON.stringify(data))
-            }
+            connections[id].send(JSON.stringify(data));
         });
   
+}
+
+const processReady = (track) => {
+  connections[clients.viber].send(JSON.stringify({ready:true, track: track}));
 }
 
 const processMessage = m => {
@@ -123,10 +117,13 @@ wss.on('connection', ws => {
   ws.on('message', message => {
     message = JSON.parse(message);
     if (message.isCode === true) {
-      processCode(message.code, message.from);
+      processCode(message.code, id);
     } 
     else if (message.isRefresh === true) {
-        processRefresh(message.token, message.from);
+        processRefresh(message.token, id);
+    }
+    else if (message.isReady === true) {
+      processReady(message.track);
     }
     else if (message.requestCreator === true) {
       if (clients.creator == null) {

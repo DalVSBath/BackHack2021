@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ArrowLayout from '../../components/ddr/arrowLayout';
 import Player from '../../components/spotify/player';
 import Countdown from "react-countdown";
 import qs from "qs";
+import { SocketContext } from '../../App';
 
 const renderer = ({ seconds, completed }) => {
     if (completed) {
@@ -23,14 +24,21 @@ const Creator = props => {
     const LIFE_THRESHOLD = 2000;
 
     const [timestamp, setTimestamp] = useState(0);
+    const [firstTimestamp, setFirstTimeStamp] = useState(0);
     const [arrows, setArrows] = useState([]);
     const [toggle, setToggle] = useState(false);
     const [playing, setPlaying] = useState(false);
 
+    const context = useContext(SocketContext);
+    
+    const relativeTime = (t) => {
+        return t - firstTimestamp; 
+    }
+
     const purgeArrows = (arrows) => {
         let arr = [];
         for (let a of arrows) {
-            if (a.timestamp - timestamp >= -LIFE_THRESHOLD) {
+            if (a.timestamp - relativeTime(timestamp) >= -LIFE_THRESHOLD) {
                 arr.push(a)
             }
         }
@@ -49,23 +57,30 @@ const Creator = props => {
     }
 
     useEffect(() => {
+        context.rebindToCreator();
         const interval = setInterval(() => {
-            if(playing)
+            if(playing) {
                 setToggle(!toggle); // todo replace with updated spotify timestamp
-            console.log(timestamp);
+                if (firstTimestamp === 0) setFirstTimeStamp(timestamp);
+                //console.log(relativeTime(timestamp));
+            }
         }, REFRESH_INTERVAL);
         return () => clearInterval(interval);
-    }, [toggle]);
+    }, [toggle, playing, firstTimestamp]);
 
     return (
-        <>      
-            <Countdown
-                date={Date.now() + 5}
-                renderer={renderer}
-                onComplete={() => setPlaying(true)}
-            />
-            <Player playing={playing} trackId={id} timeStamp={toggle} ready={s => {if(s) setTimestamp(s.timestamp);}} />
-            <ArrowLayout creator incomingArrows={arrows} timestamp={timestamp} arrowSelfGenCallback={arrowGenCallback}/>
+        <>
+
+            <Player playing={playing} trackId={id} timeStamp={toggle} ready={s => {
+                if(s) setTimestamp(s.timestamp);
+                }} />
+            <ArrowLayout creator incomingArrows={arrows} timestamp={relativeTime(timestamp)} arrowSelfGenCallback={arrowGenCallback} />
+            {playing ? "" :
+                <Countdown
+                    date={Date.now() + 5000}
+                    renderer={renderer}
+                    onComplete={() => setPlaying(true)}
+            />}
         </>
     )
 }

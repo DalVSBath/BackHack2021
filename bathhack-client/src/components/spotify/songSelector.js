@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import Player from "./player";
 import SpotifyService from "./spotifyService";
+import { SocketContext } from "../../App";
 
 class SongSelector extends React.Component {
     constructor(props) {
@@ -20,6 +21,8 @@ class SongSelector extends React.Component {
             loading: false,
         };
     }
+
+    static contextType = SocketContext;
 
     componentDidMount() {
         this._fetch();
@@ -64,7 +67,7 @@ class SongSelector extends React.Component {
                             onMouseLeave={this.stopPlaying}
                             >
                             <button
-                                onClick={() => { this.setState({redirect: true, id: item.id, playing: false}); }}
+                                onClick={() => { this.context.sendReady(item.id); this.setState({redirect: true, id: item.id, playing: false}); }}
                                 className="card-image-link"
                             >
                                 {(item.album.images && item.album.images.length > 0) ? (

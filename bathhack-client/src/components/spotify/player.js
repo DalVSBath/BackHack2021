@@ -39,7 +39,7 @@ class Player extends React.Component {
 
         if(this.player !== null && this.props.timeStamp !== prevProps.timeStamp) {
             this.player.getCurrentState().then(s => {
-                if(!s)
+                //if(!s)
                     //console.error("user not musicing");
                 this.props.ready(s);
             });
@@ -55,16 +55,14 @@ class Player extends React.Component {
 
     resume = () => {
         this.player.resume().then(() => {
-            console.log('Resumed! + ' + this.context);
-            this.player.getVolume().then(volume => {
-                let volume_percentage = volume * 100;
-                console.log(`The volume of the player is ${volume_percentage}%`);
-              });
+            this.player.getCurrentState().then(s => {if(s && s.paused) this.resume();})
+            console.log('Resumed!');
           });
     }
 
     pause = () => {
         this.player.pause().then(() => {
+            this.player.getCurrentState().then(s => {if(s && !s.paused) this.pause();})
             console.log('Paused!');
           });
     }
@@ -94,13 +92,14 @@ class Player extends React.Component {
         return new Promise(resolve => {
           if (window.Spotify) {
             resolve();
-          } else {
+          } else if(window.onSpotifyWebPlaybackSDKReady) {
               try {
                 window.onSpotifyWebPlaybackSDKReady = resolve;
-
               } catch (e) {
-                  setTimeout(resolve, 500);
+                  setTimeout(resolve, 1500);
               }
+          }else {
+            setTimeout(resolve, 1500);
           }
         }).then(() => {
             const token = this._spotifyService.GetAccessToken();
@@ -113,10 +112,16 @@ class Player extends React.Component {
         //this.player.addListener('initialization_error', ({ message }) => { console.error(message); });
         //this.player.addListener('authentication_error', ({ message }) => { console.error(message); });
         //this.player.addListener('account_error', ({ message }) => { console.error(message); });
-        //this.player.addListener('playback_error', ({ message }) => { console.error(message); });
+        this.player.addListener('playback_error', ({ message }) => { console.error(message); });
 
             // Playback status updates
-        //this.player.addListener('player_state_changed', state => { console.log(state); });
+        this.player.addListener('player_state_changed', state => { 
+            if(this.props.playing) {
+                this.resume();
+            }else{
+                this.pause();
+            } 
+        });
 
         // Ready
         this.player.addListener('ready', ({ device_id }) => {
@@ -140,6 +145,7 @@ class Player extends React.Component {
       }
 
     handleScriptError = e => {
+        console.log("Well Well Well")
         console.error(e);
     }
 
