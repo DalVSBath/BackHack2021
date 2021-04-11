@@ -25,11 +25,13 @@ class Callback extends React.Component {
     setToken(tokenSet) {
         console.log(tokenSet);
         this._spotifyService.SetAllTokens(tokenSet);
+
+        this.setState({redirect: true});
     }
 
     render() {
         if(this.state.redirect)
-            return <Redirect to={"/selector"} />
+            return <Redirect to={"/Log"} />
 
         return (
             <div>Loading...</div>

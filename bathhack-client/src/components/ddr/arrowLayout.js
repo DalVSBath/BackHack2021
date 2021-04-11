@@ -35,7 +35,7 @@ const ArrowLayout = ({incomingArrows, timestamp, arrowSelfGenCallback}) => {
                 <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw"}}>
                     <ArrowReact timestamp={timestamp} visible={arrows.visible} missed={arrows.missed}
                         arrowSelfGenCallback={arrowSelfGenCallback == null ? () => {} : arrowSelfGenCallback}/>
-
+                    
                     <Score />
                 </div>
                 <MovingArrowStaff viewRange={VIEW_RANGE} arrows={incomingArrows} timestamp={timestamp}/>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from 'react-bootstrap';
+import { Redirect } from 'react-router';
 import Player from "./player";
 import SpotifyService from "./spotifyService";
 
@@ -10,6 +11,8 @@ class SongSelector extends React.Component {
         this._spotifyService = new SpotifyService();
 
         this.state = {
+            id: null,
+            redirect: null,
             items: [],
             trackId: null,
             playing: false,
@@ -43,6 +46,10 @@ class SongSelector extends React.Component {
     }
 
     render() {
+        if(this.state.redirect) {
+            return <Redirect to={"/creator?id=" + this.state.id} />
+        }
+
         return (
             <>
                 <div>
@@ -57,7 +64,7 @@ class SongSelector extends React.Component {
                             onMouseLeave={this.stopPlaying}
                             >
                             <button
-                                onClick={() => console.log("Fun")}
+                                onClick={() => { this.setState({redirect: true, id: item.id, playing: false}); }}
                                 className="card-image-link"
                             >
                                 {(item.album.images && item.album.images.length > 0) ? (
