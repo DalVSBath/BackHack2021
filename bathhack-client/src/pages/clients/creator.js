@@ -5,7 +5,7 @@ import Player from '../../components/spotify/player';
 const Creator = () => {
 
     const REFRESH_INTERVAL = 10;
-    const LIFE_THRESHOLD = 20;
+    const LIFE_THRESHOLD = 2000;
 
     const [timestamp, setTimestamp] = useState(0);
     const [arrows, setArrows] = useState([]);

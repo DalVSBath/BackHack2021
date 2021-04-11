@@ -3,7 +3,6 @@ import { DownMoveArrow, LeftMoveArrow, RightMoveArrow, UpMoveArrow } from './mov
 
 const arrowTypeToComponent = (viewRange, arrow, timestamp) => {
 
-    console.log(-(viewRange * (1-(arrow.timestamp - timestamp))))
     const style = `translate(0, clamp(${-(viewRange * (1-(arrow.timestamp - timestamp)))}vh, -200vh, 200vh))`;
 
     const dict = {  
