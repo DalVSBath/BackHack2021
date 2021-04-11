@@ -1,9 +1,11 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useContext, useCallback} from 'react';
 import "./arrowLayout.css";
 import ArrowReact from './arrowReact';
+import { UpMoveArrow } from './movingArrow';
 import MovingArrowStaff from './movingArrowStaff';
 import Score from './score';
 import ScoreCategory from './scoreCatagory';
+import { SocketContext } from "../../App";
 
 
 const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, arrowUpdate, missedCallback}) => {
@@ -14,9 +16,40 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
     const [score, setScore] = useState(0);
     const [mostRecentScore, setMostRecentScore] = useState(0);
 
+    const context = useContext(SocketContext);
+
     const addScore = (value) => { 
         setScore(s => s + value);
         setMostRecentScore(value);
+        generateGarbage(value);
+    }
+
+    const generateGarbage = (value) => {
+
+        const nGarbage = Math.floor(value/1000 + Math.random(0, 3 * value/1000));
+    
+        const OFFSET_RANGE = {min: 200, max: 700};
+        let offset = 0;
+
+        const getType = (n) => 
+        {
+            switch (n) {
+                case 0:
+                    return "left";
+                case 1:
+                    return "up";
+                case 2:
+                    return "down";
+                default:
+                    return "right";
+            }
+        }
+
+        for (let i = 0; i < nGarbage; i++) {
+            offset += Math.floor(OFFSET_RANGE.min + Math.random() * (OFFSET_RANGE.max - OFFSET_RANGE-min))
+            type = getType(Math.floor(Math.random(i) * 4));
+            context.send(JSON.stringify({type: type, timestamp: timestamp + offset}))
+        }
     }
 
     const accountForMissed = (arrows) => {

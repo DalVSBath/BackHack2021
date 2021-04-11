@@ -21,7 +21,7 @@ const Creator = props => {
 
 
     const REFRESH_INTERVAL = 10;
-    const LIFE_THRESHOLD = 2000;
+    const LIFE_THRESHOLD = 1000;
 
     const [timestamp, setTimestamp] = useState(0);
     const [firstTimestamp, setFirstTimeStamp] = useState(0);
@@ -44,6 +44,24 @@ const Creator = props => {
         }
         return arr;
     }
+
+    const arrowCallBack = arrow => {
+        setArrows(arrows => {
+          arrow.hit = null;
+          let arr = []
+          if(playing) {
+            arr = purgeArrows(arrows);
+            arr.push(arrow);
+          }else {
+            arr = arrows;
+            arr.push(arrow);
+          }
+  
+          console.log(arrows)
+  
+          return arr;
+        });
+    };
     
     const arrowGenCallback = arrow => {
         //setTimestamp(timestamp); // todo replace with updated spotify timestamp
@@ -57,6 +75,7 @@ const Creator = props => {
     }
 
     useEffect(() => {
+        context.SetMessageCallBack(arrowCallBack);
         context.rebindToCreator();
         const interval = setInterval(() => {
             if(playing) {
@@ -74,7 +93,7 @@ const Creator = props => {
             <Player playing={playing} trackId={id} timeStamp={toggle} ready={s => {
                 if(s) setTimestamp(s.timestamp);
                 }} />
-            <ArrowLayout creator incomingArrows={arrows} timestamp={relativeTime(timestamp)} arrowSelfGenCallback={arrowGenCallback} />
+            <ArrowLayout creator incomingArrows={arrows} timestamp={relativeTime(timestamp)} arrowSelfGenCallback={arrowGenCallback} arrowUpdate={updateArrows} missedCallback={v => {if(playing) setArrows(v);}}/>
             {playing ? "" :
                 <Countdown
                     date={Date.now() + 5000}
