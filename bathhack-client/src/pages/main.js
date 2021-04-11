@@ -17,7 +17,7 @@ const Main = () => {
             <div style={{position: "absolute",top:"35vh",height:"35vh", alignItems:"center",justifyItems:"center"}}><img src={logo}/></div>
             <div style={{position: "absolute",height:"30vh",top:"60vh",}}>
                 <Link to={"/Spotify/Login"}>
-                    <button style={{ whiteSpace: 'nowrap', fontSize: "72px", backgroundColor: "Transparent", backgroundRepeat: "no-repeat", border: "none", cursor: "pointer", overflow: "hidden", outline: "none"}}>
+                    <button style={{ whiteSpace: 'nowrap', fontSize: "40px", backgroundColor: "Transparent", backgroundRepeat: "no-repeat", border: "none", cursor: "pointer", overflow: "hidden", outline: "none"}}>
                         {"> CLICK TO START <"}
                     </button>
                 </Link>

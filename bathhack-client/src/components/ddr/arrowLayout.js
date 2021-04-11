@@ -34,16 +34,35 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
           }
         }
         return arr;
-    } 
-    
-    const MissedBack = useCallback(() => {missedCallback(accountForMissed(incomingArrows));}, [accountForMissed, incomingArrows, missedCallback]);
+    }
+
+    const accountForArrow = arrow => {
+        if(missedCallback) {
+            let arr = [];
+            //console.log("Interval 2 arr length " + arrows.length);
+            for (let a of incomingArrows) {
+            if(a.timestamp == arrow.timestamp && a.type == arrow.type)
+            {
+                addScore(MISSED_SCORE);
+            }
+            else {
+                arr.push(a);
+            }
+            }
+            missedCallback(arr);
+        }
+    }
+
+    /*const cb = useCallback(() =>{
+        if (missedCallback != null) {
+        const interval = setInterval(() => {missedCallback(accountForMissed(incomingArrows));}, MISSED_INTERVAL);
+        return () => clearInterval(interval);
+    }
+}, [accountForMissed, incomingArrows, missedCallback]);
 
     useEffect(() => {
-        if (missedCallback != null) {
-            const interval = setInterval(() => {MissedBack()}, MISSED_INTERVAL);
-            return () => clearInterval(interval);
-        }
-    }, [accountForMissed, incomingArrows, missedCallback])
+        cb()
+    });*/
 
     return (
         <>
@@ -55,7 +74,7 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
                     <Score count={score}/>
                     <ScoreCategory Score={mostRecentScore}  />
                 </div>
-                <MovingArrowStaff viewRange={VIEW_RANGE} arrows={incomingArrows} timestamp={timestamp}/>
+                <MovingArrowStaff viewRange={VIEW_RANGE} arrows={incomingArrows} timestamp={timestamp} cb={accountForArrow}/>
             </div>
         </>
     );
