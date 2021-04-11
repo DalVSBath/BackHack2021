@@ -20,16 +20,21 @@ const cSocket = getCreatorSocket({requestCreator: true});
 
 const App = () => {
   return (
-    <><div>
+    <><div sytle={{alignItems: "center"}}>
         <video src={video1} playsinline autoPlay muted loop id="myVideo"/>
       </div>
       <BrowserRouter>
         <React.Suspense fallback={"Loading..."}>
           <Switch>
+<<<<<<< Updated upstream
             <Route path="/" exact = {true} render={props => 
               
               <div><h1> We're using react... <Link  to={"/Log"}>Go to Log</Link> </h1></div>
       
+=======
+            <Route path="/" exact={true} render={props => 
+              <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width: "100vw"}}><h1 style={{fontSize: "70px", width:"100%"}}>Welcome to 𝒟𝒾𝓈𝐻𝒶𝓇𝓂𝑜𝓃𝓎</h1><br></br><Link style={{fontSize: "35px", textAlign: "center"}} to={"/Log"}>Click to Start</Link></div>
+>>>>>>> Stashed changes
             } />
             <Route path="/creator" render={props => <SocketContext.Provider value={cSocket}>
                 <Creator {...props} />

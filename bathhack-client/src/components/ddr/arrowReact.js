@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Arrow from "../../content/arrow.svg";
 import { SocketContext } from '../../App';
-import Hollow from "../../content/arrow.svg";
+import Hollow from "../../content/arrowHit.svg";
 
 class ArrowReact extends React.Component {
     constructor(props){
@@ -9,6 +9,7 @@ class ArrowReact extends React.Component {
       this.onKeyDown = this.onKeyDown.bind(this);
       this.onKeyUp = this.onKeyUp.bind(this);
       this.from = this.props.creator ? "creator" : "viber";
+      var dad;
     }
     static contextType = SocketContext;
     onKeyUp(event){
