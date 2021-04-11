@@ -37,13 +37,18 @@ class Player extends React.Component {
                 });
         }
 
-        if(this.props.timeStamp !== prevProps.timeStamp) {
-            this.player.getCurrentState().then(s => {
-                if(!s)
-                    console.error("user not musicing");
-                this.props.ready(s)
-            });
+        try {
+            if(this.player != null && this.props.timeStamp !== prevProps.timeStamp) {
+                this.player.getCurrentState().then(s => {
+                    if(!s)
+                        console.error("user not musicing");
+                    this.props.ready(s)
+                });
+            }
+        } catch (e) {
+            
         }
+
     }
 
     togglePlayback = () => {

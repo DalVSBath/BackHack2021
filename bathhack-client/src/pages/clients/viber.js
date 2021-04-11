@@ -17,10 +17,44 @@ const renderer = ({ seconds, completed }) => {
   };
 
 const Viber = () => {  
+
+    const REFRESH_INTERVAL = 10;
+    const LIFE_THRESHOLD = 20000;
+
     const [playing, setPlaying] = useState(false);
     const [arrows, setArrows] = useState([]);
+    const [timestamp, setTimestamp] = useState(0);
 
     const contextType = useContext(SocketContext);
+
+    //maybe some validation needed here
+
+    const purgeArrows = (arrows) => {
+      let arr = [];
+      for (let a of arrows) {
+          if (a.timestamp - timestamp >= -LIFE_THRESHOLD) {
+              if (!a.hit) {
+                arr.push(a)
+              }
+              else if (a.hit == null) {
+                a.hit = false;
+              }
+          } 
+          else {
+
+          }
+      }
+      return arr;
+    }
+
+    contextType.AddMessageCallback(arrow => {
+      setArrows(arrows => {
+        let arr = purgeArrows(arrows);
+        arr.push(arrow);
+
+        return arr;
+      });
+    });
 
     const arrowGenCallback = arrows => {
 

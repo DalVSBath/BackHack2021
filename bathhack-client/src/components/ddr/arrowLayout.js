@@ -7,7 +7,7 @@ import Score from './score';
 
 const ArrowLayout = ({incomingArrows, timestamp, arrowSelfGenCallback}) => {
 
-    const VIEW_RANGE = 5;
+    const VIEW_RANGE = 1/20;
     
     const classifyIncomingArrows = () => {
 
