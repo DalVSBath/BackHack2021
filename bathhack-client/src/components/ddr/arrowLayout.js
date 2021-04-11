@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import "./arrowLayout.css";
 import ArrowReact from './arrowReact';
 import MovingArrowStaff from './movingArrowStaff';
@@ -35,10 +35,12 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
         }
         return arr;
     } 
+    
+    const MissedBack = useCallback(() => {missedCallback(accountForMissed(incomingArrows));}, [accountForMissed, incomingArrows, missedCallback]);
 
     useEffect(() => {
         if (missedCallback != null) {
-            const interval = setInterval(() => {missedCallback(accountForMissed(incomingArrows))}, MISSED_INTERVAL);
+            const interval = setInterval(() => {MissedBack()}, MISSED_INTERVAL);
             return () => clearInterval(interval);
         }
     }, [accountForMissed, incomingArrows, missedCallback])

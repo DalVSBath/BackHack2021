@@ -23,8 +23,9 @@ const Viber = props => {
         return t - firstTimestamp; 
     }
 
+    const thing = Date.now(); 
+
     const REFRESH_INTERVAL = 10;
-    const MISSED_INTERVAL = 500;
     const LIFE_THRESHOLD = 1000;
 
     const [playing, setPlaying] = useState(false);
@@ -96,7 +97,7 @@ const Viber = props => {
             <ArrowLayout incomingArrows={arrows} timestamp={relativeTime(timestamp)} arrowUpdate={updateArrows} missedCallback={v => {if(playing) setArrows(v);}}/>
             {playing ? "" :
             <Countdown
-                date={Date.now() +8000}
+                date={thing + 8000}
                 renderer={renderer}
                 onComplete={() => setPlaying(true)}
             />}

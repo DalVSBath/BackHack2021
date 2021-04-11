@@ -13,6 +13,7 @@ const Viber = React.lazy(() => import("./pages/clients/viber"));
 const SpotifyCallback = React.lazy(() => import("./pages/spotify/callback"));
 const SpotifyLogin = React.lazy(() => import("./pages/spotify/login"));
 const Waiting = React.lazy(() => import("./pages/clients/waiting"));
+const Main = React.lazy(() => import("./pages/main"));
 
 const Log = React.lazy(() => import("./pages/creatorOrViber"));
 
@@ -29,11 +30,7 @@ const App = () => {
         <React.Suspense fallback={"Loading..."}>
           <Switch>
             <Route path="/" exact={true} render={props => 
-              <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", height:"130vh", width: "100vw"}}>
-                <div style={{height:"90vh"}}> <h1 style={{fontSize: "70px",top:"10vh", width:"100%"}}>Welcome to </h1></div>
-                <div style={{position: "absolute",top:"35vh",height:"35vh", alignItems:"center",justifyItems:"center"}}><img src={logo}/></div>
-                <div style={{position: "absolute",height:"30vh",top:"60vh",}}><Link style={{fontSize: "35px"}} to={"/Log"}>Click to Start</Link></div>
-                </div>
+              <Main {...props}/>
             } />
             <Route path="/creator" render={props => <SocketContext.Provider value={cSocket}>
                 <Creator {...props} />
