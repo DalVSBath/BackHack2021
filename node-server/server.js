@@ -5,8 +5,8 @@ const fetch = require("node-fetch");
 const hostname = '127.0.0.1';
 const port = 4180;
 
-const SpotifySecret = "e3b2bc257c9f443bb1c0a6a527c612ab";
-const SpotifyId = "50f563707d1041d5bc9237357be49ee6";
+const SpotifySecret = "HIDDEN";
+const SpotifyId = "ID";
 
 const connections = {};
 const clients = {creator: null, viber: null};
@@ -48,7 +48,7 @@ const processRefresh = (token, id) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': "Basic NTBmNTYzNzA3ZDEwNDFkNWJjOTIzNzM1N2JlNDllZTY6ZTNiMmJjMjU3YzlmNDQzYmIxYzBhNmE1MjdjNjEyYWI="
+            'Authorization': "Basic GottaHide="
         },
         body: formBody
     })
