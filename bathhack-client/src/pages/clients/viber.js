@@ -23,8 +23,6 @@ const Viber = props => {
         return t - firstTimestamp; 
     }
 
-    const thing = Date.now(); 
-
     const REFRESH_INTERVAL = 10;
     const LIFE_THRESHOLD = 1000;
 
@@ -68,8 +66,14 @@ const Viber = props => {
     const arrowCallBack = arrow => {
       setArrows(arrows => {
         arrow.hit = null;
-        let arr = purgeArrows(arrows);
-        arr.push(arrow);
+        let arr = []
+        if(playing) {
+          arr = purgeArrows(arrows);
+          arr.push(arrow);
+        }else {
+          arr = arrows;
+          arr.push(arrow);
+        }
 
         console.log(arrows)
 
@@ -97,7 +101,7 @@ const Viber = props => {
             <ArrowLayout incomingArrows={arrows} timestamp={relativeTime(timestamp)} arrowUpdate={updateArrows} missedCallback={v => {if(playing) setArrows(v);}}/>
             {playing ? "" :
             <Countdown
-                date={thing + 8000}
+                date={Date.now() + 8000}
                 renderer={renderer}
                 onComplete={() => setPlaying(true)}
             />}
