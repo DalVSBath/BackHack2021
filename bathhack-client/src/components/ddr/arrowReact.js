@@ -31,14 +31,12 @@ class ArrowReact extends React.Component {
         this.context.send({type: "up", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "up", timestamp: this.props.timestamp});
         document.getElementById("green").src=Hollow;
-        //document.getElementById("green").className="layout-arrow"
         console.log("clicked up")
       }
       else if(event.keyCode === 39){
         this.context.send({type: "right", timestamp: this.props.timestamp});
         this.props.arrowSelfGenCallback({type: "right", timestamp: this.props.timestamp});
         document.getElementById("yellow").src=Hollow;
-        //document.getElementById("yellow").className="layout-arrow";
         console.log("clicked right")
       }
       else if(event.keyCode === 40){
