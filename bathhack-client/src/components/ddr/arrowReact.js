@@ -16,29 +16,43 @@ class ArrowReact extends React.Component {
     }
     static contextType = SocketContext;
     
+    hitProcess(direction, index, arrow) {
+      if (arrow.type === direction) {
+        let timeDiff = arrow.timestamp - this.props.timestamp;
+        if (Math.abs(timeDiff) < this.NOTE_HIT_TOLERANCE && arrow.hit == null) {
+          console.log("ARROW HIT GOD DAMN")
+          if(this.props.arrowUpdate)
+            this.props.arrowUpdate(index, true);
+          this.props.addScore((this.NOTE_HIT_TOLERANCE-Math.abs(timeDiff))*this.PERFECT_SCORE);
+          return true;
+        } else if (timeDiff > this.NOTE_HIT_TOLERANCE && timeDiff < this.NOTE_MISS_MULTIPLIER * this.NOTE_HIT_TOLERANCE) {
+          console.log("u r suck")
+          if(this.props.arrowUpdate)
+            this.props.arrowUpdate(index, false);
+          this.props.addScore(-(this.NOTE_HIT_TOLERANCE * this.NEGATIVE_SCORE_MULT))
+          return true;
+        }
+
+        // Only consider other in column if the next is already missed
+        if (! timeDiff < -this.NOTE_HIT_TOLERANCE) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     checkForNoteHit(direction) { 
       for (let index = 0; index < this.props.arrows.length; index++) {
         let arrow = this.props.arrows[index];
-        if (arrow.type === direction) {
-          let timeDiff = arrow.timestamp - this.props.timestamp;
-          if (Math.abs(timeDiff) < this.NOTE_HIT_TOLERANCE && arrow.hit == null) {
-            console.log("ARROW HIT GOD DAMN")
-            if(this.props.arrowUpdate)
-              this.props.arrowUpdate(index, true);
-            this.props.addScore((this.NOTE_HIT_TOLERANCE-Math.abs(timeDiff))*this.PERFECT_SCORE);
-            break;
-          } else if (timeDiff > this.NOTE_HIT_TOLERANCE && timeDiff < this.NOTE_MISS_MULTIPLIER * this.NOTE_HIT_TOLERANCE) {
-            console.log("u r suck")
-            if(this.props.arrowUpdate)
-              this.props.arrowUpdate(index, false);
-            this.props.addScore(-(this.NOTE_HIT_TOLERANCE * this.NEGATIVE_SCORE_MULT))
-            break;
-          }
 
-          // Only consider other in column if the next is already missed
-          if (! timeDiff < -this.NOTE_HIT_TOLERANCE) {
-            break;
+        if (this.props.creator) {
+          if (arrow.garbage) {
+            if(this.hitProcess(direction, index, arrow))
+              return;
           }
+        } else {
+          if(this.hitProcess(direction, index, arrow))
+            return;
         }
       }
     }

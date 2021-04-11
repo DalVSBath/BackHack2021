@@ -23,7 +23,7 @@ class creatorOrViber extends React.Component {
         this.setState({redirect: ""});
     }
     render() {
-        if(this.state.redirect)
+        if(this.state.redirect !== null)
             return <Redirect to={"/"} />
         return (<div style={{display: "flex", alignItems: "center", justifyContent: "center", height:"100vh", width:"100wh"}}>
                 <title><header>something</header></title>

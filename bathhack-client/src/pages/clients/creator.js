@@ -45,7 +45,23 @@ const Creator = props => {
         return arr;
     }
 
+    const updateArrows = (index, state) => {
+        setArrows(arrows => {
+          arrows[index].hit = state;
+          let arr = purgeArrows(arrows);
+          //console.log(arrows)
+  
+          return arr;
+        });
+  
+    }
+
     const arrowCallBack = arrow => {
+
+        if (arrow.garbage) arrow.timestamp += timestamp;
+        console.log(arrow);
+
+
         setArrows(arrows => {
           arrow.hit = null;
           let arr = []

@@ -23,7 +23,7 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
     const addScore = (value) => { 
         setScore(s => s + value);
         setMostRecentScore(value);
-        generateGarbage(value);
+        if (!creator) generateGarbage(value);
     }
 
     const generateGarbage = (value) => {
@@ -32,6 +32,7 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
     
         const OFFSET_RANGE = {min: 200, max: 700};
         let offset = 0;
+        let type;
 
         const getType = (n) => 
         {
@@ -48,9 +49,9 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
         }
 
         for (let i = 0; i < nGarbage; i++) {
-            offset += Math.floor(OFFSET_RANGE.min + Math.random() * (OFFSET_RANGE.max - OFFSET_RANGE-min))
+            offset += Math.floor(OFFSET_RANGE.min + Math.random() * (OFFSET_RANGE.max - OFFSET_RANGE.min))
             type = getType(Math.floor(Math.random(i) * 4));
-            context.send(JSON.stringify({type: type, timestamp: timestamp + offset}))
+            context.send({type: type, timestamp: offset, garbage: true});
         }
     }
 
@@ -72,19 +73,21 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
     }
 
     const accountForArrow = arrow => {
+        if((creator && arrow.garbage) || !creator) {
         if(missedCallback) {
             let arr = [];
             //console.log("Interval 2 arr length " + arrows.length);
             for (let a of incomingArrows) {
-            if(a.timestamp == arrow.timestamp && a.type == arrow.type)
-            {
-                addScore(MISSED_SCORE);
-            }
-            else {
-                arr.push(a);
-            }
+                if(a.timestamp == arrow.timestamp && a.type == arrow.type)
+                {
+                    addScore(MISSED_SCORE);
+                }
+                else {
+                    arr.push(a);
+                }
             }
             missedCallback(arr);
+            }
         }
     }
 
