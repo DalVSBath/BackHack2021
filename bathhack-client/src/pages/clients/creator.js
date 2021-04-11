@@ -57,10 +57,7 @@ const Creator = props => {
     }
 
     const arrowCallBack = arrow => {
-
-        if (arrow.garbage) arrow.timestamp += timestamp;
-        console.log(arrow);
-
+        if (arrow.garbage) {arrow.timestamp += relativeTime(timestamp);
 
         setArrows(arrows => {
           arrow.hit = null;
@@ -76,7 +73,7 @@ const Creator = props => {
           console.log(arrows)
   
           return arr;
-        });
+        });}
     };
     
     const arrowGenCallback = arrow => {

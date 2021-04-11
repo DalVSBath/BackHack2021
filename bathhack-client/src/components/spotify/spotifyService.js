@@ -14,6 +14,11 @@ class SpotifyService {
 
         return Cookies.Get(SpotifyAccessToken);
     }
+
+    IsValid() {
+        var expires = Date.parse(Cookies.Get(SpotifyTokenExpiry));
+        return (expires <= new Date());
+    }
     static contextType = SocketContext;
 
     SetAccessToken(AccessToken, ExpiresIn) {

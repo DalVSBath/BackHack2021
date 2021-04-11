@@ -28,9 +28,9 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
 
     const generateGarbage = (value) => {
 
-        const nGarbage = Math.floor(value/1000 + Math.random(0, 3 * value/1000));
+        const nGarbage = Math.floor(value/2000 + Math.random(0, 3 * value/2000));
     
-        const OFFSET_RANGE = {min: 200, max: 700};
+        const OFFSET_RANGE = {min: 1000, max: 1500};
         let offset = 0;
         let type;
 

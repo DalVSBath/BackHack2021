@@ -1,8 +1,19 @@
 import React from "react";
+import { Redirect } from "react-router";
+import SpotifyService from "../../components/spotify/spotifyService";
 import logo from "../../content/spotify-logo.svg";
 
 class Login extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this._spotifyService = new SpotifyService();
+    }
+
     render() {
+        if(this._spotifyService.IsValid())
+            return <Redirect push to={"/Log"} />
+
         return (
             <div style={{position: "absolute", display: "flex", alignItems: "center", justifyContent: "center", flexFlow: "column", height:"100vh", width: "100vw"}}>
                 <a style={{textDecoration: "none", flexFlow: "colmn"}} href={
