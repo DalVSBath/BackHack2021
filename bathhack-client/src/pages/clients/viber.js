@@ -106,7 +106,7 @@ const Viber = props => {
                 onComplete={() => setPlaying(true)}
             />}
             {/* <Player playing={playing} trackId="6730LysZdBvgjo5MgWo4Tm" ready={() => console.log("Ready")} /> */}
-            <Player playing={playing} trackId={id} timeStamp={toggle} ready={s => {
+            <Player TrackEnd={() => setArrows(null)} playing={playing} trackId={id} timeStamp={toggle} ready={s => {
                 if(s) setTimestamp(s.timestamp);
                 }} />
         </>

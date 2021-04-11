@@ -89,8 +89,7 @@ const Creator = props => {
 
     return (
         <>
-
-            <Player playing={playing} trackId={id} timeStamp={toggle} ready={s => {
+            <Player TrackEnd={() => setArrows(null)} playing={playing} trackId={id} timeStamp={toggle} ready={s => {
                 if(s) setTimestamp(s.timestamp);
                 }} />
             <ArrowLayout creator incomingArrows={arrows} timestamp={relativeTime(timestamp)} arrowSelfGenCallback={arrowGenCallback} arrowUpdate={updateArrows} missedCallback={v => {if(playing) setArrows(v);}}/>

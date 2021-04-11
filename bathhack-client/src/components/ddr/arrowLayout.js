@@ -1,4 +1,5 @@
 import React, {useState, useContext, useCallback} from 'react';
+import { Redirect } from 'react-router';
 import "./arrowLayout.css";
 import ArrowReact from './arrowReact';
 import { UpMoveArrow } from './movingArrow';
@@ -15,6 +16,7 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
     const MISSED_SCORE = -800;
     const [score, setScore] = useState(0);
     const [mostRecentScore, setMostRecentScore] = useState(0);
+    const [end, setEnd] = useState(false)
 
     const context = useContext(SocketContext);
 
@@ -91,11 +93,10 @@ const ArrowLayout = ({creator, incomingArrows, timestamp, arrowSelfGenCallback, 
         const interval = setInterval(() => {missedCallback(accountForMissed(incomingArrows));}, MISSED_INTERVAL);
         return () => clearInterval(interval);
     }
-}, [accountForMissed, incomingArrows, missedCallback]);
+}, [accountForMissed, incomingArrows, missedCallback]);*/
 
-    useEffect(() => {
-        cb()
-    });*/
+    if(incomingArrows === null)
+        return <Redirect to={"/complete?score=" + score} />
 
     return (
         <>
